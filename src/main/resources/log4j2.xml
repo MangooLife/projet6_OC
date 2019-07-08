@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 <Configuration status="warn">
     <Properties>
         <Property name="basePath">Logs</Property>
     </Properties>
-
     <Appenders>
-        <RollingFile name="fileLogger" fileName="${basePath}/MyLogs.log" filePattern="${basePath}/app-info-%d{yyyy-MM-dd}.log">
+        <RollingFile name="fileLogger" fileName="${basePath}/myLogs.log" filePattern="${basePath}/app-info-%d{yyyy-MM-dd}.log">
             <PatternLayout>
                 <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
             </PatternLayout>
@@ -12,16 +13,15 @@
                 <TimeBasedTriggeringPolicy interval="1" modulate="true" />
             </Policies>
         </RollingFile>
-
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout   pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="main.java" level="debug" additivity="true">
-            <appender-ref ref="fileLogger" level="trace" />
+        <Logger name="com.thamarai" level="all" additivity="true">
+            <appender-ref ref="fileLogger" level="debug" />
         </Logger>
-        <Root level="trace" additivity="false">
+        <Root level="all" additivity="false">
             <appender-ref ref="console" />
         </Root>
     </Loggers>
