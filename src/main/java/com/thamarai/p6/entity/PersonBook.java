@@ -1,33 +1,38 @@
 package com.thamarai.p6.entity;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name = "db_projet6_OC.person_book")
-public class PersonBook {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "person_id")
-    private Long personId;
+public class PersonBook implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8494325532250499062L;
+
+	@EmbeddedId
+	private PersonBookId id; 
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "booking_id")
-    private Long bookId;
+	@ManyToOne(optional = false)
+    @JoinColumn(name = "person_id")
+    private Person person;
+	
+	@ManyToOne(optional = false)
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
 	
 	public PersonBook() {}
 
-	public Long getPersonId() { return personId; }
+	public Person getPersonId() { return person; }
 
-	public void setPersonId(Long personId) { this.personId = personId; }
+	public void setPersonId(Person person) { this.person = person; }
 
-	public Long getBookId() { return bookId; }
+	public Booking getBookId() { return booking; }
 
-	public void setBookId(Long bookId) { this.bookId = bookId; }
+	public void setBookId(Booking booking) { this.booking = booking; }
 	
 }

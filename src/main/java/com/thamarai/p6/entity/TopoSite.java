@@ -1,33 +1,38 @@
 package com.thamarai.p6.entity;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name = "db_projet6_OC.topo_site")
-public class TopoSite {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "topo_id")
-    private Long topoId;
+public class TopoSite implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4808360298517332138L;
+
+	@EmbeddedId
+	private TopoSiteId id; 
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "site_id")
-    private Long siteId;
+	@ManyToOne(optional = false)
+    @JoinColumn(name = "topo_id")
+    private Topo topo;
+	
+	@ManyToOne(optional = false)
+    @JoinColumn(name = "site_id")
+    private Site site;
 	
 	public TopoSite() {}
 
-	public Long getPersonId() { return topoId; }
+	public Topo getsiteTopo() { return topo; }
 
-	public void setPersonId(Long personId) { this.topoId = personId; }
+	public void setsiteTopo(Topo topo) { this.topo = topo; }
 
-	public Long getBookId() { return siteId; }
+	public Site getSite() { return site; }
 
-	public void setBookId(Long bookId) { this.siteId = bookId; }
+	public void setSite(Site site) { this.site = site; }
 	
 }
