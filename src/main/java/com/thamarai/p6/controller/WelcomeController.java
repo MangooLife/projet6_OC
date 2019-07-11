@@ -6,24 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.thamarai.p6.repository.SiteRepository;
+import com.thamarai.p6.service.SiteService;
+
 
 @Controller
+//@RequestMapping("/accueil")
 public class WelcomeController {
 
     private static final Logger LOGGER = LogManager.getLogger(WelcomeController.class);
 
     @Autowired
-    SiteRepository siteRepository;
+    SiteService siteService;
 
     @GetMapping("/")
     public String index(Model model) {
         LOGGER.debug("Welcome to LADE");
-        //model.addAttribute("msgs", "OK");
+        model.addAttribute("msgs", siteService.getAllSites());
         LOGGER.error("KO");
         return "index";
-
     }
 
 }

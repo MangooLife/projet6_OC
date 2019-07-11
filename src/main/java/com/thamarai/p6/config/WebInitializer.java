@@ -1,19 +1,17 @@
-package com.thamarai.p6;
+package com.thamarai.p6.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import com.thamarai.p6.config.SpringConfig;
 
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+    	return new Class[] { PersistenceJPAConfig.class };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{SpringConfig.class};
+        return new Class[]{ SpringConfig.class };
     }
 
     @Override
