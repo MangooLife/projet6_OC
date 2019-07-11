@@ -1,5 +1,11 @@
 package com.thamarai.p6.repository;
 
-public class BookingRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.thamarai.p6.entity.Booking;
+
+@Repository
+public interface BookingRepository extends JpaRepository<Booking, Long>{
 
 }

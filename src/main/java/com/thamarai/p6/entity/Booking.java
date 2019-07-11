@@ -18,7 +18,7 @@ public class Booking {
     @Column(name = "date")
     private String date;
     
-    public Booking() {}
+    public Booking() {};
 
 	public Long getId() { return id; }
 
