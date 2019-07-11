@@ -28,10 +28,10 @@ public class Longueur {
     private String width;
     
     @Column(name = "voie_id")
-    private Integer voieId;
+    private Long voieId;
     
     @Column(name = "relai_id")
-    private Integer relaiId;
+    private Long relaiId;
     
     public Longueur() {}
     
@@ -55,12 +55,12 @@ public class Longueur {
 
 	public void setWidth(String width) { this.width = width; }
 
-	public Integer getVoieId() { return voieId; }
+	public Long getVoieId() { return voieId; }
 
-	public void setVoieId(Integer voieId) { this.voieId = voieId; }
+	public void setVoieId(Long voieId) { this.voieId = voieId; }
 
-	public Integer getRelaiId() { return relaiId; }
+	public Long getRelaiId() { return relaiId; }
 
-	public void setRelaiId(Integer relaiId) { this.relaiId = relaiId;}
+	public void setRelaiId(Long relaiId) { this.relaiId = relaiId;}
 
 }

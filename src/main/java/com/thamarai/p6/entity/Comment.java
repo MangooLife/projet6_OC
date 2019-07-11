@@ -19,7 +19,7 @@ public class Comment {
     private String description;
     
     @Column(name = "person_id")
-    private String personId;
+    private Long personId;
     
     public Comment() {}
 	
@@ -31,8 +31,8 @@ public class Comment {
 
 	public void setDescription(String description) { this.description = description; }
 
-	public String getPersonId() { return personId; }
+	public Long getPersonId() { return personId; }
 
-	public void setPersonId(String personId) { this.personId = personId; }
+	public void setPersonId(Long personId) { this.personId = personId; }
 
 }

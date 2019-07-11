@@ -22,7 +22,7 @@ public class Site {
     private String label;
     
     @Column(name = "person_id")
-    private String person;
+    private Long person;
 
     public Site() {}
 
@@ -38,8 +38,8 @@ public class Site {
 
 	public void setLabel(String label) { this.label = label; }
 
-	public String getPerson() { return person; }
+	public Long getPerson() { return person; }
 
-	public void setPerson(String person) { this.person = person;}
+	public void setPerson(Long person) { this.person = person;}
     
 }
