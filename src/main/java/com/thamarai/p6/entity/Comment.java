@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +19,8 @@ public class Comment {
 	@Column(name = "description")
     private String description;
     
-    @Column(name = "person_id")
-    private Long personId;
+    @ManyToOne
+    private Person person;
     
     public Comment() {}
 	
@@ -31,8 +32,7 @@ public class Comment {
 
 	public void setDescription(String description) { this.description = description; }
 
-	public Long getPersonId() { return personId; }
+	public Person getPerson() { return person; }
 
-	public void setPersonId(Long personId) { this.personId = personId; }
-
+	public void setPerson(Person person) { this.person = person; }
 }

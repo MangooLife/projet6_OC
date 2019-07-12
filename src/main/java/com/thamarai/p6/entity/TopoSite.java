@@ -27,9 +27,9 @@ public class TopoSite implements Serializable{
 	
 	public TopoSite() {}
 
-	public Topo getsiteTopo() { return topo; }
+	public Topo getTopo() { return topo; }
 
-	public void setsiteTopo(Topo topo) { this.topo = topo; }
+	public void setTopo(Topo topo) { this.topo = topo; }
 
 	public Site getSite() { return site; }
 

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +19,8 @@ public class Secteur {
     @Column(name = "name")
     private String name;
     
-    @Column(name = "site_id")
-    private Long siteId;
+    @ManyToOne
+    private Site site;
     
     public Secteur() {}
 
@@ -31,8 +32,8 @@ public class Secteur {
 
 	public void setName(String name) { this.name = name; }
 
-	public Long getSiteId() { return siteId; }
+	public Site getSite() { return site; }
 
-	public void setSiteId(Long siteId) { this.siteId = siteId; }
+	public void setSite(Site site) { this.site = site; }
     
 }

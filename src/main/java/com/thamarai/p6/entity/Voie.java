@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,8 +25,8 @@ public class Voie {
     @Column(name = "width")
     private Long width;
     
-    @Column(name = "secteur_id")
-    private Long secteurId;
+    @ManyToOne
+    private Secteur secteur;
     
     public Voie() {}
 
@@ -45,8 +46,8 @@ public class Voie {
 
 	public void setWidth(Long width) { this.width = width; }
 
-	public Long getSecteurId() { return secteurId; }
+	public Secteur getSecteurId() { return secteur; }
 
-	public void setSecteurId(Long secteurId) { this.secteurId = secteurId; }
+	public void setSecteurId(Secteur secteur) { this.secteur = secteur; }
     
 }

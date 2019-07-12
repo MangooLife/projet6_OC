@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,11 +31,11 @@ public class Topo {
     @Column(name = "status")
     private String status;
     
-    @Column(name = "person_id")
-    private Long personId;
+    @ManyToOne
+    private Person person;
     
-    @Column(name = "booking_id")
-    private Long bookingId;
+    @ManyToOne
+    private Booking booking;
     
     public Topo() {}
 
@@ -62,12 +63,12 @@ public class Topo {
 
 	public void setStatus(String status) { this.status = status; }
 
-	public Long getPersonId() { return personId; }
+	public Person getPerson() { return person; }
 
-	public void setPersonId(Long personId) { this.personId = personId; }
+	public void setPerson(Person person) { this.person = person; }
 
-	public Long getBookingId() { return bookingId; }
+	public Booking getBooking() { return booking; }
 
-	public void setBookingId(Long bookingId) { this.bookingId = bookingId; }
+	public void setBooking(Booking booking) { this.booking = booking; }
 
 }

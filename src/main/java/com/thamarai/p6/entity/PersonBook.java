@@ -27,12 +27,12 @@ public class PersonBook implements Serializable{
 	
 	public PersonBook() {}
 
-	public Person getPersonId() { return person; }
+	public Person getPerson() { return person; }
 
-	public void setPersonId(Person person) { this.person = person; }
+	public void setPerson(Person person) { this.person = person; }
 
-	public Booking getBookId() { return booking; }
+	public Booking getBook() { return booking; }
 
-	public void setBookId(Booking booking) { this.booking = booking; }
+	public void setBook(Booking booking) { this.booking = booking; }
 	
 }

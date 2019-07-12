@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,11 +28,8 @@ public class Longueur {
     @Column(name = "width")
     private String width;
     
-    @Column(name = "voie_id")
-    private Long voieId;
-    
-    @Column(name = "relai_id")
-    private Long relaiId;
+    @ManyToOne
+    private Voie voie;
     
     public Longueur() {}
     
@@ -55,12 +53,7 @@ public class Longueur {
 
 	public void setWidth(String width) { this.width = width; }
 
-	public Long getVoieId() { return voieId; }
+	public Voie getVoie() { return voie; }
 
-	public void setVoieId(Long voieId) { this.voieId = voieId; }
-
-	public Long getRelaiId() { return relaiId; }
-
-	public void setRelaiId(Long relaiId) { this.relaiId = relaiId;}
-
+	public void setVoie(Voie voie) { this.voie = voie; }
 }

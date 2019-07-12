@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,8 +22,8 @@ public class Site {
     @Column(name = "label")
     private String label;
     
-    @Column(name = "person_id")
-    private Long person;
+    @ManyToOne
+    private Person person;
 
     public Site() {}
 
@@ -38,8 +39,8 @@ public class Site {
 
 	public void setLabel(String label) { this.label = label; }
 
-	public Long getPerson() { return person; }
+	public Person getPerson() { return person; }
 
-	public void setPerson(Long person) { this.person = person;}
+	public void setPerson(Person person) { this.person = person;}
     
 }
