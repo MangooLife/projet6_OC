@@ -1,5 +1,29 @@
 <header>
-	<nav class="navbar sticky-top navbar-light bg-light">
-		<span class="navbar-brand mb-0 h1"><a class="navbar-brand" href="index.php?action=cover">Billet simple pour l'Alaska <i class="fas fa-feather-alt"></i></a><span class='helloMsgResponsive'> | Bienvenue <?= $_SESSION['pseudo']?></span>	
-	</nav>			
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="./">
+			<img src="./resources/image/LADE.png" width=150 height=150 alt="Les amis de l'escalade"/>
+		</a>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Accueil</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="./">Topos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Sites</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Réserver</a>
+				</li>
+			</ul>
+		</div>
+		<form class="form-inline">
+			<input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search">
+			<button class="btn" type="submit">
+				<i class="fas fa-search"></i>
+			</button>
+		</form>
+	</nav>
 </header>

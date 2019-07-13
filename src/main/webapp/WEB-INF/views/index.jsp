@@ -6,21 +6,21 @@ pageEncoding="UTF-8"%>
     <head lang="fr">
 	   <meta charset="utf-8" />
     	<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<link rel="icon" type="image/png" href="./public/images/iconBSPA.png" sizes="32x32" />
+		<link rel="icon" type="image/png" href="./resources/image/LADE.png" sizes="32x32" />
         <title>Les amis de l'escalade</title>
         <!-- Metadescription nécessaire au SEO -->
-		<meta name="description" content="Billet simple pour l'Alaska - Un roman de Jean Forteroche">
+		<meta name="description" content="Les amis de l'escalade - Site communautaire autour de l'escalade">
 		<!-- Opengraph -->
-		<meta property="og:title" content="Billet simple pour l'Alaska - Un roman de Jean Forteroche" />
+		<meta property="og:title" content="Les amis de l'escalade - Site communautaire autour de l'escalade" />
 		<meta property="og:type" content="article" />
 		<meta property="og:url" content="#" />
 		<meta property="og:image" content="#" />
 		<!-- Twitter card -->
 		<meta name='twitter:card' content='summary_large_image' />
-		<meta name='twitter:site' content='@JeanForteroche' />
-		<meta name='twitter:creator' content='@JeanForteroche' />
-		<meta name='twitter:title' content="Billet simple pour l'Alaska" />
-		<meta name='twitter:description' content="Billet simple pour l'Alaska - Un roman de Jean Forteroche" />
+		<meta name='twitter:site' content='@LADE' />
+		<meta name='twitter:creator' content='@LADE' />
+		<meta name='twitter:title' content="Les amis de l'escalade" />
+		<meta name='twitter:description' content="Site communautaire autour de l'escalade" />
 		<meta name='twitter:image' content='#' />
 		<!--******************************** Feuilles de style ********************************-->
 		<!-- FontAwesome -->
@@ -30,7 +30,7 @@ pageEncoding="UTF-8"%>
  	 	<!-- Style CSS -->
         <link href="./resources/css/style.css" rel="stylesheet" />
     </head>
-    <body class="book">
+    <body class="website">
 		<%@ include file="header.jsp"%>
 			<c:forEach items="${msgs}" var="element">
 	            <div>

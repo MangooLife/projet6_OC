@@ -4,64 +4,14 @@
  =======================================================================
  */
 @font-face {
-	font-family: 'CormorantGaramond-Bold';
-	src: url('../font/cormorant-garamond/CormorantGaramond-Bold.ttf');
+	font-family: 'Montserrat-Bold';
+	src: url('../font/montserrat/Montserrat-Bold.ttf');
 	font-weight: normal;
 }
 
 @font-face {
-	font-family: 'CormorantGaramond-BoldItalic';
-	src: url('../font/cormorant-garamond/CormorantGaramond-BoldItalic.ttf');
-	font-weight: normal;
-}
-
-@font-face {
-	font-family: 'CormorantGaramond-Italic';
-	src: url('../font/cormorant-garamond/CormorantGaramond-Italic.ttf');
-	font-weight: normal;
-}
-
-@font-face {
-	font-family: 'CormorantGaramond-Light';
-	src: url('../font/cormorant-garamond/CormorantGaramond-Light.ttf');
-	font-weight: normal;
-}
-
-@font-face {
-	font-family: 'CormorantGaramond-LightItalic';
-	src: url('../font/cormorant-garamond/CormorantGaramond-LightItalic.ttf');
-	font-weight: normal;
-}
-
-@font-face {
-	font-family: 'CormorantGaramond-Medium';
-	src: url('../font/cormorant-garamond/CormorantGaramond-Medium.ttf');
-	font-weight: normal;
-}
-
-@font-face {
-	font-family: 'CormorantGaramond-MediumItalic';
-	src:
-		url('../font/cormorant-garamond/CormorantGaramond-MediumItalic.ttf');
-	font-weight: normal;
-}
-
-@font-face {
-	font-family: 'CormorantGaramond-Regular';
-	src: url('../font/cormorant-garamond/CormorantGaramond-Regular.ttf');
-	font-weight: normal;
-}
-
-@font-face {
-	font-family: 'CormorantGaramond-SemiBold';
-	src: url('../font/cormorant-garamond/CormorantGaramond-SemiBold.ttf');
-	font-weight: normal;
-}
-
-@font-face {
-	font-family: 'CormorantGaramond-SemiBoldItalic';
-	src:
-		url('../font/cormorant-garamond/CormorantGaramond-SemiBoldItalic.ttf');
+	font-family: 'Montserrat-Regular';
+	src: url('../font/montserrat/Montserrat-Regular.ttf');
 	font-weight: normal;
 }
 
@@ -71,68 +21,26 @@
  =======================================================================
  */
 html, body {
-	font-family: 'CormorantGaramond-Regular', Arial, sans-serif;
+	font-family: 'Montserrat-Regular', Arial, sans-serif;
 	/*	display: -ms-flexbox;
 	display: flex;*/
-	color: #000000;
 	margin: auto;
 	width: 100%;
 	min-height: 100%;
+	
 }
 
 h1, h2, h3 {
-	font-family: 'CormorantGaramond-Bold', Arial, sans-serif;
+	font-family: 'Montserrat-Bold', Arial, sans-serif;
 }
 
 h1 {
 	text-transform: uppercase;
 }
 
-.titleChap h2 {
-	text-transform: uppercase;
-}
-
 /* 
  =======================================================================
- ------------------------------ COVER ----------------------------------
- =======================================================================
- */
-body.cover {
-	background-image: url("../images/cover.jpg");
-	background-attachment: fixed;
-	background-size: cover;
-	font-size: 20px;
-}
-
-.infoCover {
-	margin: auto 25%;
-	margin-top: 10%;
-	padding: 30px;
-	position: absolute;
-	text-align: center;
-	background-color: rgba(255, 255, 255, 0.5);
-	border-radius: 5px;
-}
-
-.infoCover>p {
-	text-align: justify;
-	color: black;
-	padding: 15px;
-}
-
-.author {
-	font-style: italic;
-	font-weight: bold;
-	font-size: 20px;
-}
-
-.buttonNovel {
-	text-align: right;
-}
-
-/* 
- =======================================================================
- ------------------------------- BOOK ----------------------------------
+ ------------------------------- WEBSITE -------------------------------
  =======================================================================
  */
 
@@ -141,43 +49,9 @@ body.cover {
  * body
  *
  */
-body.book {
+body.website {
 	font-size: 20px;
-	background-image: url("../images/cover.jpg");
-	background-attachment: fixed;
 	background-size: cover;
-}
-
-body>footer {
-	background-color: black;
-	background-attachment: fixed;
-	background-size: cover;
-	color: white;
-	padding: 35px;
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-}
-
-footer>div {
-	margin: 20px;
-}
-
-.infoAuthor {
-	width: 40%;
-}
-
-.infoSite {
-	width: 50%;
-}
-
-a.infoSite {
-	color: red;
-}
-
-.titleNovel {
-	font-style: italic;
-	font-weight: bold;
 }
 
 /*
@@ -186,29 +60,19 @@ a.infoSite {
  *
  */
 header {
-	/* header sticky */
-	position: -webkit-sticky; /*required for Safari*/
-	position: sticky;
-	top: 0; /* required as well. */
-	z-index: 99;
+	/* header sticky 
+	position: -webkit-sticky; 
+	top: 0; 
+	z-index: 99;*/
 }
 
-.on, .off {
-	padding: 5px;
-	color: white;
-	border-radius: 50%;
+.bg-light {
+    background-color: #ffffff!important;
 }
 
-.on {
-	background-color: green;
-}
-
-.off {
-	background-color: red;
-}
-
-.navbar-brand {
-	font-weight: bold !important;
+.navbar-light .navbar-nav .nav-link {
+    color: #000000;
+    margin-left: 30px
 }
 
 .nav-item {
@@ -217,6 +81,25 @@ header {
 
 .nav {
 	align-items: center;
+}
+
+/*
+ *
+ * footer
+ *
+ */
+body>footer {
+	background-color: black;
+	background-attachment: fixed;
+	background-size: cover;
+	color: white;
+	width: 100%;
+	text-align: left;
+}
+
+.footerContainer {
+	padding: 35px;
+	text-align: left;
 }
 
 /*
