@@ -34,42 +34,29 @@ pageEncoding="UTF-8"%>
         <link href="./resources/css/style.css" rel="stylesheet" />
     </head>
     <body class="website">
-		<header>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light" id="header">
-				<a class="navbar-brand" href="./">
-					<img src="./resources/image/LADE.png" width=150 height=150 alt="Les amis de l'escalade" id="imgHeader"/>
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNav">
-					<ul class="navbar-nav">
-						<li class="nav-item">
-							<a class="nav-link" href="./">Accueil</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="./topos">Topos</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="./sites">Sites</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="./booking">Réserver</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="./connexion">
-								Se connecter
-								<i class="fas fa-power-off off"></i>
-							</a>
-							
-						</li>
-					</ul>
-					<form class="form-inline search">
-						<input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search">
-						<button class="btn" type="submit">
-							<i class="fas fa-search"></i>
-						</button>
-					</form>
-				</div>
-			</nav>
-		</header>
+		<%@ include file="header.jsp"%>
+	        <div class="container">
+	        	<div class="row">
+	        		<div class="col-sm-12">
+	        			<div class="row">
+	        				<c:out items="${sites}" var="element">
+								<div class="card col-lg-4 col-sm-12 topoHome">
+									<img src="./resources/image/LADE.png" width="200" height="300" class="card-img-top" alt="...">
+									<div class="card-body">
+										<h5 class="card-title">${element.name}</h5>
+										<p class="card-text">
+											Gummies cake gingerbread gingerbread sesame snaps brownie biscuit ice cream gingerbread. Danish danish tiramisu candy halvah
+											liquorice donut fruitcake. 
+										</p>
+										<a href="./site?id=${element.id}" class="btn btn-primary" target="_blank">Plus d'info ></a>
+									</div>
+								</div>
+					        </c:out>
+					     </div>
+	        		</div>
+	        	</div>
+	       	</div>
+		<%@ include file="footer.jsp"%>
+		<script src="./resources/js/navBar.js"></script>
+    </body>
+</html>

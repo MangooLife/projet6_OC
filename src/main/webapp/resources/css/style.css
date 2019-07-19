@@ -31,7 +31,8 @@ html, body {
 }
 
 h1, h2, h3 {
-	font-family: 'Montserrat-Bold', Arial, sans-serif;
+	font-family: 'Montserrat-Bold', Arial, sans-serif;	
+	padding-top:10px;
 }
 
 h1 {
@@ -60,14 +61,25 @@ body.website {
  *
  */
 header {
-	/* header sticky 
-	position: -webkit-sticky; 
-	top: 0; 
-	z-index: 99;*/
+	/* header sticky */
+ 	position: -webkit-sticky; /*required for Safari*/
+ 	position: sticky;
+ 	top: 0; /* required as well. */
+ 	z-index: 99;
+}
+
+.shrink {
+	height: 100px;
+	font-size: 15px;
+}
+
+.shrinkImg {
+	width: 50px;
+	height: 50px;
 }
 
 .bg-light {
-    background-color: #ffffff!important;
+    background-color: #f0f5eb!important;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -83,6 +95,29 @@ header {
 	align-items: center;
 }
 
+.navbar-nav {
+	background-color: #f0f5eb;
+}
+
+.on, .off{
+	padding: 5px;
+	color: white;
+	border-radius: 50%;
+}
+
+.on{
+	background-color: green;
+}
+
+.off{
+	background-color: red;
+}
+
+.search {
+	background-color: #f0f5eb;
+	padding: 10px;	
+}
+
 /*
  *
  * footer
@@ -95,6 +130,7 @@ body>footer {
 	color: white;
 	width: 100%;
 	text-align: left;
+	margin-top:40px;
 }
 
 .footerContainer {
@@ -104,189 +140,146 @@ body>footer {
 
 /*
  *
- * chapters 
+ * jumbotron
  *
  */
-.story {
-	margin: auto 15%;
-	padding-bottom: 20px;
-	background-image: url("../images/paper.jpg");
-	background-attachment: fixed;
-	background-size: cover;
+.jumbotron {
+  background-image: url("../image/hu-chen.jpg");
+  background-size: cover;
+  color: white;
+  text-align: right;
 }
 
-.story h1 {
-	margin: 10px;
-	margin-top: 0px;
-	padding-top: 50px;
-	padding-bottom: 50px;
-	text-align: center;
-	/*	background-image: url("../images/tree.png");
-    background-repeat: repeat-x;
-    background-size: 30px 30px;
-    background-position: bottom;*/
-}
-
-.story p, h2 {
-	text-align: justify;
-	padding-left: 70px;
-	padding-right: 70px;
-}
-
-.pagination {
-	padding-left: 100px;
+.jumbotron>h1 {
+	margin-top: 300px;
 }
 
 /*
  *
- * Chapter page
+ * home
  *
  */
-.container {
-	margin: auto;
-	text-align: center;
-	font-weight: bold;
-	margin-top: 100px;
-	margin-bottom: 50px;
-}
-
-/*
- *
- * comments form
- *
- */
-.comments {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	align-items: center;
-	margin: auto 15%;
-	padding: 20px;
-	background-color: rgba(255, 255, 255, 0.5);
-}
-
-.comments label {
-	display: none;
-}
-
-.comments input {
-	margin: 1px;
-}
-
-.listComments {
-	overflow-y: scroll;
-	width: 40%;
-	height: 300px;
-}
-
-.listComments p {
-	margin: 0;
-}
-
-.listComments span {
-	font-weight: bold;
-}
-
-.listComments a {
-	text-decoration: none;
-}
-
-.fa-exclamation-circle {
-	color: red;
-}
-
-.fa-eye {
-	color: blue;
-}
-
-.fa-check-circle {
-	color: green;
-}
-
-/*
- *
- * Login/Registration forms
- *
- */
-.connexionPage {
-	margin: auto 15%;
-	margin-top: 10%;
+.topoHome {
 	padding: 10px;
-	position: absolute;
-	text-align: center;
-	border-radius: 5px;
-	width: 70%;
-	height: 50%;
-	background-attachment: fixed;
-	background-size: cover;
-}
-
-.formConnexion {
-	background-color: rgba(255, 255, 255, 0.5);
-	border-radius: 5px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	align-items: center;
-	text-align: justify;
-}
-
-.connexion {
-	padding: 50px;
-}
-
-.registration {
-	padding: 50px;
-}
-
-a.retour {
-	padding-top: 10px;
-	text-decoration: none;
+	border: none;
+	font-size: 15px;
 }
 
 /*
  *
- * backoffice
+ * connexion + booking - https://bootsnipp.com/snippets/dldxB
  *
  */
-.formPost label {
-	display: none;
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  margin:0;
 }
 
-.formPost input[type=submit] {
-	margin: 10px;
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
 }
 
-.formPost {
-	margin: auto;
-	width: 0%;
-	justify-content: center;
-	margin-bottom: 20px;
-	display: none;
+#formFooter {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  padding: 25px;
+  text-align: center;
+  -webkit-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
 }
 
-.updatePost label {
-	display: none;
+h2.inactive {
+  color: #cccccc;
 }
 
-.updatePost input[type=submit] {
-	margin: 10px;
+h2.active {
+  color: #0d0d0d;
+  border-bottom: 2px solid #5fbae9;
 }
 
-.updatePost {
-	margin: auto;
-	width: 70%;
-	justify-content: center;
-	margin-bottom: 20px;
+input[type=button], input[type=submit], input[type=reset]  {
+  background-color: #56baed;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 20px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-.mce-notification-warning {
-	display: none;
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+  background-color: #39ace7;
 }
 
-/* error pages */
-.stopErreur {
-	width: 100%;
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+input[type=text] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=text]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+
+input[type=text]:placeholder {
+  color: #cccccc;
+}
+
+#topoList {
+  margin:10px;
+  width: 90%;
+  display: inline-block;
 }
 
 /* 

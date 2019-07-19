@@ -4,9 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.thamarai.p6.service.SiteService;
 
@@ -20,12 +20,10 @@ public class WelcomeController {
     @Autowired
     SiteService siteService;
 
-    @GetMapping("/")
-    public String index(Model model) {
+    @RequestMapping("/")
+    public ModelAndView index() {
         LOGGER.debug("Welcome to LADE");
-        model.addAttribute("msgs", siteService.getAllSites());
-        LOGGER.error("KO");
-        return "index";
+        return new ModelAndView("index", "sites", siteService.getAllSites());
     }
 
 }
