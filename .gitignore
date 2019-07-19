@@ -1,0 +1,10 @@
+/target/
+.classpath
+.idea/
+.project
+.settings/
+Logs/
+bin/
+projet6_OC.iml
+src/main/webapp/WEB-INF/web.xml
+application.properties
