@@ -7,11 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.thamarai.p6.entity.Site;
 import com.thamarai.p6.service.SiteService;
 
 
@@ -26,13 +24,13 @@ public class SiteController {
     @RequestMapping("/sites")
     public ModelAndView sites() {
     	LOGGER.debug("Sites page OK");
-        return new ModelAndView("sites","sites", "OK");
+        return new ModelAndView("sites","sites", siteService.getAllSites());
     }
 
-    @RequestMapping(value="/site/{id}", method=RequestMethod.GET)
-    @ResponseBody
-    public ModelAndView site(@RequestParam("id") final Long id) {
-        return new ModelAndView("site","sites", siteService.getSite(id));
+    @GetMapping("/site/{id}")
+    public ModelAndView site(@PathVariable("id") final Long id) {
+    	Site site = siteService.getSite(id).orElse(null);
+    	return new ModelAndView("site", "site", site);
     }
 
 }

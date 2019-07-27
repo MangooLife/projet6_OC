@@ -10,16 +10,16 @@
 						<img src="./resources/image/LADE.png" height="200" widht="200" id="icon" alt="User Icon" />
 					</div>
 					
-					<!-- Login Form -->
-					<form>
-						<input type="text" id="login" class="fadeIn second" name="login" placeholder="Mail" required>
-						<input type="text" id="password" class="fadeIn third" name="login" placeholder="Mot de passe" required>
+					<!-- login Form -->
+					<form action="<c:url value="/authentificate" />" method="post">
+						<input type="text" id="username" class="fadeIn second" name="username" placeholder="Login" required>
+						<input type="password" id="password" class="fadeIn third" name="password" placeholder="Mot de passe" required>
 						<input type="submit" class="fadeIn fourth" value="Connexion">
 					</form>
 					
 					<!-- Remind Passowrd -->
 					<div id="formFooter">
-						<a class="underlineHover" href="#">Mot de passe oublié ?</a>
+						<a class="underlineHover" href="<c:url value="/subscribe" />">Devenir membre LADE ?</a>
 					</div>
 				</div>
 			</div>

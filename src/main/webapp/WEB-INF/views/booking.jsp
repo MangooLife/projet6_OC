@@ -11,11 +11,9 @@
 						<input type="text" id="firstname" class="fadeIn third" name="login" placeholder="Prénom" required disabled>
 						<div class="form-group form-control-sm">
 						    <select class="form-control" id="topoList">
-						      <option>Sites 1</option>
-						      <option>Sites 2</option>
-						      <option>Sites 3</option>
-						      <option>Sites 4</option>
-						      <option>Sites 5</option>
+						   		<c:forEach items="${topos}" var="element">
+						   			<option>${element.name}</option>
+						   		</c:forEach>
 						    </select>
 						</div>
 						<input type="submit" class="fadeIn fourth" value="Réserver">

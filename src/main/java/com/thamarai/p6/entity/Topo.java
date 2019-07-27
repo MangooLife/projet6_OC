@@ -31,6 +31,9 @@ public class Topo {
     @Column(name = "status")
     private String status;
     
+    @Column(name = "image")
+    private String image;
+    
     @ManyToOne
     private Person person;
     
@@ -62,6 +65,10 @@ public class Topo {
 	public String getStatus() { return status; }
 
 	public void setStatus(String status) { this.status = status; }
+
+	public String getImage() { return image; }
+
+	public void setImage(String image) { this.image = image; }
 
 	public Person getPerson() { return person; }
 

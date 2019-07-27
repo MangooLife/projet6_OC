@@ -26,6 +26,10 @@ public class PersonService {
 		return PersonRepository.findById(id);
 	}
 	
+	public Optional<Person> authentificateUser(String username, String password) {
+		return PersonRepository.authentificateUser(username, password);
+	}
+	
 	public void addPerson(Person person) {
 		PersonRepository.save(person);
 	}

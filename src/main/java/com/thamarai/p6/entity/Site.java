@@ -22,6 +22,12 @@ public class Site {
     @Column(name = "label")
     private String label;
     
+    @Column(name = "description")
+    private String description;
+    
+    @Column(name = "image")
+    private String image;
+    
     @ManyToOne
     private Person person;
 
@@ -42,5 +48,13 @@ public class Site {
 	public Person getPerson() { return person; }
 
 	public void setPerson(Person person) { this.person = person;}
+
+	public String getDescription() { return description; }
+
+	public void setDescription(String description) { this.description = description; }
+
+	public String getImage() { return image; }
+
+	public void setImage(String image) { this.image = image; }
     
 }

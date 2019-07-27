@@ -14,10 +14,19 @@
 							Informations
 						</h3>
 						 <ul>
-							<li><a class="navbar-brand" href="./topos">Topos</a></li>
-							<li><a class="navbar-brand" href="./sites">Sites</a></li>
-							<li><a class="navbar-brand" href="./booking">Réserver</a></li>
-							<li><a class="navbar-brand" href="./connexion">Se connecter</a></li>
+							<li><a class="navbar-brand" href="<c:url value="/topos" />">Topos</a></li>
+							<li><a class="navbar-brand" href="<c:url value="/sites" />">Sites</a></li>
+							<li><a class="navbar-brand" href="<c:url value="/booking" />">Réserver</a></li>
+							<li>
+								<c:choose>
+								    <c:when test="${sessionScope.username == null}">
+								        <a class="navbar-brand" href="<c:url value="/connexion" />">Se connecter</a>
+								    </c:when>    
+								    <c:otherwise>
+										<a class="navbar-brand" href="<c:url value="/deconnexion" />">Se déconnecter</a>
+								    </c:otherwise>
+								</c:choose>
+							</li>
 						</ul>
 					</div>
 					<div class="col-lg-3 col-sm-12">
@@ -53,6 +62,6 @@
 				</div>
 			</div>
 		</footer>
-		<script src="./resources/js/navBar.js"></script>
+		<script src="<c:url value="/resources/js/navBar.js" />"></script>
     </body>
 </html>
