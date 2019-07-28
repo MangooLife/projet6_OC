@@ -19,7 +19,7 @@
 							<li><a class="navbar-brand" href="<c:url value="/booking" />">Réserver</a></li>
 							<li>
 								<c:choose>
-								    <c:when test="${sessionScope.username == null}">
+								    <c:when test="${empty sessionScope.username}">
 								        <a class="navbar-brand" href="<c:url value="/connexion" />">Se connecter</a>
 								    </c:when>    
 								    <c:otherwise>

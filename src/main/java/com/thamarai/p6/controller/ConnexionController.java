@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,8 @@ public class ConnexionController {
 	@RequestMapping("/deconnexion")
 	public String deconnexion(Model model, HttpSession session) {
 		LOGGER.debug("Deconnexion page OK");
+		session.removeAttribute("firstname");
+		session.removeAttribute("lastname");
 		session.removeAttribute("username");
 		session.removeAttribute("admin");
 		return "connexion";
@@ -41,9 +44,11 @@ public class ConnexionController {
 	@ResponseBody
 	public ModelAndView login(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) {
 
-		Person person = personService.authentificateUser(username, password).orElse(null);
+		Person person = personService.authentificateUser(username).orElse(null);
 
-		if(person!=null) {
+		if(person != null && BCrypt.checkpw(password, person.getPassword())) {
+			session.setAttribute("firstname", person.getFirstname());
+			session.setAttribute("lastname", person.getLastname());
 			session.setAttribute("username", person.getUsername());
 			session.setAttribute("admin", person.getStatus());
 			return new ModelAndView("person", "person", person);
@@ -72,9 +77,12 @@ public class ConnexionController {
 		person.setLastname(lastname);
 		person.setBirthdate(birthdate);
 		person.setUsername(username);
-		person.setPassword(password);
-		person.setStatus("Membre");
+		String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
+		person.setPassword(hashed);
+		person.setStatus("Member");
 		personService.addPerson(person);
+		session.setAttribute("firstname", person.getFirstname());
+		session.setAttribute("lastname", person.getLastname());
 		session.setAttribute("username", person.getUsername());
 		session.setAttribute("admin", person.getStatus());
 		return new ModelAndView("person", "person", person);

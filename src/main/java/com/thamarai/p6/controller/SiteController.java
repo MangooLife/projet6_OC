@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.thamarai.p6.Exception.ResourceNotFoundException;
 import com.thamarai.p6.entity.Site;
 import com.thamarai.p6.service.SiteService;
 
@@ -28,8 +29,8 @@ public class SiteController {
     }
 
     @GetMapping("/site/{id}")
-    public ModelAndView site(@PathVariable("id") final Long id) {
-    	Site site = siteService.getSite(id).orElse(null);
+    public ModelAndView site(@PathVariable("id") final Long id) throws ResourceNotFoundException {
+    	Site site = siteService.getSite(id).orElseThrow(() -> new ResourceNotFoundException(id, "Site"));
     	return new ModelAndView("site", "site", site);
     }
 

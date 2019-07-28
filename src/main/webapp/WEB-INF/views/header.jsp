@@ -58,7 +58,7 @@ pageEncoding="UTF-8"%>
 						</li>
 						<li class="nav-item">
 							<c:choose>
-							    <c:when test="${sessionScope.username == null}">
+							    <c:when test="${empty sessionScope.username}">
 							        <a class="nav-link" href="<c:url value="/connexion"/>">
 										Se connecter
 										<i class="fas fa-power-off off"></i>

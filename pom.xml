@@ -92,12 +92,19 @@
         </dependency>
 
         <dependency>
-		  <groupId>javax.persistence</groupId>
-		  <artifactId>persistence-api</artifactId>
-		  <version>1.0.2</version>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mindrot</groupId>
+		    <artifactId>jbcrypt</artifactId>
+		    <version>0.3m</version>
 		</dependency>
 
     </dependencies>
+
 	<build>
 	  <finalName>projet6_OC</finalName>
 	  <plugins>

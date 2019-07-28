@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.thamarai.p6.Exception.ResourceNotFoundException;
 import com.thamarai.p6.entity.Site;
 import com.thamarai.p6.repository.SiteRepository;
 
@@ -23,7 +24,7 @@ public class SiteService {
 		return sites;
 	}
 	
-	public Optional<Site> getSite(Long id) {
+	public Optional<Site> getSite(Long id) throws ResourceNotFoundException {
 		return siteRepository.findById(id);
 	}
 	
@@ -31,11 +32,11 @@ public class SiteService {
 		siteRepository.save(site);
 	}
 	
-	public void updateSite(String id, Site site) {
+	public void updateSite(String id, Site site) throws ResourceNotFoundException {
 		siteRepository.save(site);
 	}
 	
-	public void deleteSite(Long id) {
+	public void deleteSite(Long id)  throws ResourceNotFoundException {
 		siteRepository.deleteById(id);
 	}
 

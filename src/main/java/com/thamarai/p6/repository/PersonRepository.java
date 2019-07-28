@@ -11,7 +11,7 @@ import com.thamarai.p6.entity.Person;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long>{
 
-	@Query(value = "SELECT * FROM Person p WHERE p.username = ? AND p.password = ?", nativeQuery = true)
-	Optional<Person> authentificateUser(String username, String password);
+	@Query(value = "SELECT * FROM Person p WHERE p.username = ?", nativeQuery = true)
+	Optional<Person> authentificateUser(String username);
 	
 }
