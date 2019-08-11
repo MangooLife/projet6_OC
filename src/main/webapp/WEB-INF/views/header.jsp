@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head lang="fr">
@@ -56,22 +57,30 @@ pageEncoding="UTF-8"%>
 						<li class="nav-item">
 							<a class="nav-link" href="<c:url value="/booking"/>">Réserver</a>
 						</li>
-						<li class="nav-item">
-							<c:choose>
-							    <c:when test="${empty sessionScope.username}">
+						<c:choose>
+						    <c:when test="${empty sessionScope.username}">
+						    	<li class="nav-item">
 							        <a class="nav-link" href="<c:url value="/connexion"/>">
 										Se connecter
 										<i class="fas fa-power-off off"></i>
 									</a>
-							    </c:when>    
-							    <c:otherwise>
+								</li>
+						    </c:when>    
+						    <c:otherwise>
+						    	<li class="nav-item">
+							        <a class="nav-link" href="<c:url value="/member"/>">
+										Espace membre
+									</a>
+								</li>
+						    	<li class="nav-item">
 									<a class="nav-link" href="<c:url value="/deconnexion"/>">
 										Se déconnecter
 										<i class="fas fa-power-off on"></i>
 									</a>
-							    </c:otherwise>
-							</c:choose>
-						</li>
+								</li>
+						    </c:otherwise>
+						</c:choose>
+						
 					</ul>
 					<form class="form-inline search">
 						<input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search">

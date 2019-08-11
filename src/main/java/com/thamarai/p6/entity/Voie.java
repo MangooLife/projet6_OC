@@ -1,11 +1,19 @@
 package com.thamarai.p6.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -20,13 +28,19 @@ public class Voie {
     private String name;
     
     @Column(name = "cotation")
-    private Long cotation;
+    private String cotation;
     
     @Column(name = "width")
     private Long width;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="secteur_id")
+    @OrderBy
     private Secteur secteur;
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "voie", cascade = CascadeType.ALL)
+    @OrderBy
+    private Set<Longueur> longueurs = new HashSet<Longueur>();
     
     public Voie() {}
 
@@ -38,16 +52,20 @@ public class Voie {
 
 	public void setName(String name) { this.name = name; }
 
-	public Long getCotation() { return cotation; }
+	public String getCotation() { return cotation; }
 
-	public void setCotation(Long cotation) { this.cotation = cotation; }
+	public void setCotation(String cotation) { this.cotation = cotation; }
 
 	public Long getWidth() { return width; }
 
 	public void setWidth(Long width) { this.width = width; }
 
-	public Secteur getSecteurId() { return secteur; }
+	public Secteur getSecteur() { return secteur; }
 
-	public void setSecteurId(Secteur secteur) { this.secteur = secteur; }
-    
+	public void setSecteur(Secteur secteur) { this.secteur = secteur; }
+
+	public Set<Longueur> getLongueurs() { return longueurs; }
+
+	public void setLongueurs(Set<Longueur> longueurs) { this.longueurs = longueurs; }
+	
 }

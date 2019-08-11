@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +16,19 @@ import com.thamarai.p6.repository.SiteRepository;
 @Service
 public class SiteService {
 	
+	private static final Logger LOGGER = LogManager.getLogger(SiteService.class);
+	
 	@Autowired
 	private SiteRepository siteRepository;	
 	
 	public List<Site> getAllSites() {
 		List<Site> sites = new ArrayList<>();
-		siteRepository.findAll()
-		.forEach(sites::add);
+		try {
+			siteRepository.findAll()
+			.forEach(sites::add);
+		}catch(Exception e) {
+			LOGGER.warn("No sites found on database");
+		}
 		return sites;
 	}
 	

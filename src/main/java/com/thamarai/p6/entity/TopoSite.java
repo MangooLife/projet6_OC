@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 @Entity
 public class TopoSite implements Serializable{
@@ -17,11 +18,13 @@ public class TopoSite implements Serializable{
 	@EmbeddedId
 	private TopoSiteId id; 
 	
-	@ManyToOne(optional = false)
+	@ManyToOne
+	@MapsId("topo_id")
     @JoinColumn(name = "topo_id")
     private Topo topo;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne
+	@MapsId("site_id")
     @JoinColumn(name = "site_id")
     private Site site;
 	

@@ -4,7 +4,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.thamarai.p6.entity.Person;
+import com.thamarai.p6.service.CommentService;
 import com.thamarai.p6.service.PersonService;
 
 @Controller
@@ -23,6 +23,9 @@ public class ConnexionController {
 
 	@Autowired
 	PersonService personService;
+	
+	@Autowired
+	CommentService commentService;
 
 	@RequestMapping("/connexion")
 	public String connexion(Model model) {
@@ -42,18 +45,21 @@ public class ConnexionController {
 
 	@RequestMapping(value = {"/authentificate"}, method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView login(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) {
-
-		Person person = personService.authentificateUser(username).orElse(null);
-
-		if(person != null && BCrypt.checkpw(password, person.getPassword())) {
+	public ModelAndView authentificate(
+			HttpSession session, 
+			Model model,
+			@RequestParam("username") String username, 
+			@RequestParam("password") String password
+	) {
+		if(personService.passwordOk(username, password)) {
+			Person person = personService.authentificateUser(username).orElse(null);
 			session.setAttribute("firstname", person.getFirstname());
 			session.setAttribute("lastname", person.getLastname());
 			session.setAttribute("username", person.getUsername());
 			session.setAttribute("admin", person.getStatus());
-			return new ModelAndView("person", "person", person);
+			return member(session, model);
 		} else {
-			return new ModelAndView("connexion", "OK", "OK");
+			return new ModelAndView("connexion");
 		}
 	}
 
@@ -66,6 +72,7 @@ public class ConnexionController {
 	@RequestMapping("/newMember")
 	public ModelAndView createNewPerson(
 		HttpSession session,
+		Model model,
 		@RequestParam("firstname") String firstname,
 		@RequestParam("lastname") String lastname,
 		@RequestParam("birthdate") String birthdate,
@@ -77,15 +84,30 @@ public class ConnexionController {
 		person.setLastname(lastname);
 		person.setBirthdate(birthdate);
 		person.setUsername(username);
-		String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
-		person.setPassword(hashed);
+		person.setPassword(password);
 		person.setStatus("Member");
 		personService.addPerson(person);
 		session.setAttribute("firstname", person.getFirstname());
 		session.setAttribute("lastname", person.getLastname());
 		session.setAttribute("username", person.getUsername());
 		session.setAttribute("admin", person.getStatus());
-		return new ModelAndView("person", "person", person);
+		return member(session, model);
+	}
+	
+	@RequestMapping("/member")
+	public ModelAndView member(HttpSession session, Model model) {
+		if(!(session.getAttribute("username")==null)) {
+			String username = (String) session.getAttribute("username");
+			Person person = personService.authentificateUser(username).orElse(null);
+			model.addAttribute("person", person);
+			model.addAttribute("topos", person.getTopos());
+			model.addAttribute("comments", person.getComments());
+			return new ModelAndView("person");
+			
+		} else {
+			return new ModelAndView("connexion");
+		}
+		
 	}
 
 }

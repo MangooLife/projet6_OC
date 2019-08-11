@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 import com.thamarai.p6.entity.Topo;
 
 @Repository
-public interface TopoRepository extends JpaRepository<Topo, Long>{
-
-}
+public interface TopoRepository extends JpaRepository<Topo, Long>{	}

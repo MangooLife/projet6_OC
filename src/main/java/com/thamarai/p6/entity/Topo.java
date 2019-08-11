@@ -1,11 +1,21 @@
 package com.thamarai.p6.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -34,11 +44,26 @@ public class Topo {
     @Column(name = "image")
     private String image;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="person_id", referencedColumnName = "id")
+    @OrderBy
     private Person person;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="booking_id", referencedColumnName = "id")
+    @OrderBy
     private Booking booking;
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "topo", cascade = CascadeType.ALL)
+    @OrderBy
+    private Set<Comment> comments = new HashSet<Comment>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+    		  name = "topo_site", 
+    		  joinColumns = @JoinColumn(name = "topo_id"), 
+    		  inverseJoinColumns = @JoinColumn(name = "site_id"))
+    private Set<Site> topoSites  = new HashSet<Site>();
     
     public Topo() {}
 
@@ -78,4 +103,12 @@ public class Topo {
 
 	public void setBooking(Booking booking) { this.booking = booking; }
 
+	public Set<Comment> getComments() { return comments; }
+
+	public void setComments(Set<Comment> comments) { this.comments = comments; }
+
+	public Set<Site> getTopoSites() { return topoSites; }
+
+	public void setTopoSites(Set<Site> topoSites) { this.topoSites = topoSites; }
+	
 }

@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 import com.thamarai.p6.entity.Site;
 
 @Repository
-public interface SiteRepository extends JpaRepository<Site, Long>{
-
-}
+public interface SiteRepository extends JpaRepository<Site, Long>{ }

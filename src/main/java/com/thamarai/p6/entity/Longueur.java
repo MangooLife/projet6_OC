@@ -2,10 +2,13 @@ package com.thamarai.p6.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +31,9 @@ public class Longueur {
     @Column(name = "width")
     private String width;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="voie_id")
+    @OrderBy
     private Voie voie;
     
     public Longueur() {}

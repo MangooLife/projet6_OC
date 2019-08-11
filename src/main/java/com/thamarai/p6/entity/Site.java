@@ -1,11 +1,19 @@
 package com.thamarai.p6.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +38,17 @@ public class Site {
     
     @ManyToOne
     private Person person;
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
+    @OrderBy
+    private Set<Secteur> secteurs = new HashSet<Secteur>();
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
+    @OrderBy
+    private Set<Comment> comments = new HashSet<Comment>();
+    
+    @ManyToMany(mappedBy = "topoSites")
+    private Set<Topo> topos = new HashSet<Topo>();
 
     public Site() {}
 
@@ -56,5 +75,16 @@ public class Site {
 	public String getImage() { return image; }
 
 	public void setImage(String image) { this.image = image; }
-    
+
+	public Set<Secteur> getSecteurs() { return secteurs; }
+
+	public void setSecteurs(Set<Secteur> secteurs) { this.secteurs = secteurs; }
+
+	public Set<Comment> getComments() { return comments; }
+
+	public void setComments(Set<Comment> comments) { this.comments = comments; }
+
+	public Set<Topo> getTopos() { return topos; }
+
+	public void setTopos(Set<Topo> topos) { this.topos = topos; }	
 }

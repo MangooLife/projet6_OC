@@ -1,11 +1,19 @@
 package com.thamarai.p6.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -19,8 +27,14 @@ public class Secteur {
     @Column(name = "name")
     private String name;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="site_id")
+    @OrderBy
     private Site site;
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "secteur", cascade = CascadeType.ALL)
+    @OrderBy
+    private Set<Voie> voies = new HashSet<Voie>();
     
     public Secteur() {}
 
@@ -35,5 +49,9 @@ public class Secteur {
 	public Site getSite() { return site; }
 
 	public void setSite(Site site) { this.site = site; }
+
+	public Set<Voie> getVoies() { return voies; }
+
+	public void setVoies(Set<Voie> voies) { this.voies = voies;}
     
 }

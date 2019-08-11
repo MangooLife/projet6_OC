@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 @Entity
 public class PersonBook implements Serializable{
@@ -17,11 +18,13 @@ public class PersonBook implements Serializable{
 	@EmbeddedId
 	private PersonBookId id; 
 	
-	@ManyToOne(optional = false)
+	@ManyToOne
+	@MapsId("person_id")
     @JoinColumn(name = "person_id")
     private Person person;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne
+	@MapsId("booking_id")
     @JoinColumn(name = "booking_id")
     private Booking booking;
 	

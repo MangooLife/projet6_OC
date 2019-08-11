@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 import com.thamarai.p6.entity.Secteur;
 
 @Repository
-public interface SecteurRepository extends JpaRepository<Secteur, Long>{
-
-}
+public interface SecteurRepository extends JpaRepository<Secteur, Long>{}

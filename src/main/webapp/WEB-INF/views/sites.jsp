@@ -17,7 +17,7 @@
 							<p class="card-text">
 								${element.description}
 							</p>
-							<a href="./site/${element.id}" class="btn btn-primary" target="_blank">Plus d'info ></a>
+							<a href="./site/${element.id}" class="btn btn-primary">Plus d'info ></a>
 						</div>
 					</div>
         		</c:forEach>

@@ -1,12 +1,16 @@
 package com.thamarai.p6.controller;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.thamarai.p6.Exception.ResourceNotFoundException;
+import com.thamarai.p6.entity.Site;
 import com.thamarai.p6.service.SiteService;
 
 
@@ -19,9 +23,17 @@ public class WelcomeController {
     SiteService siteService;
 
     @RequestMapping("/")
-    public ModelAndView index() {
+    public String index(Model model) throws ResourceNotFoundException {
         LOGGER.debug("Welcome to LADE");
-        return new ModelAndView("index", "sites", siteService.getAllSites());
+        List<Site> sites = siteService.getAllSites();
+        if(sites.isEmpty()) {
+        	LOGGER.info("No sites was charged");
+        	return "index";
+        } else {
+        	LOGGER.info("There is some sites was charged");
+        	model.addAttribute("sites", sites);
+        	return "index";
+        }
     }
 
 }
