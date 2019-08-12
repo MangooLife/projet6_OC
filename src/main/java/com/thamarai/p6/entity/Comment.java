@@ -21,6 +21,9 @@ public class Comment {
 
 	@Column(name = "description")
     private String description;
+	
+	@Column(name = "publication_date")
+    private String publicationDate;
     
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="person_id", referencedColumnName = "id")
@@ -46,6 +49,10 @@ public class Comment {
 	public String getDescription() { return description; }
 
 	public void setDescription(String description) { this.description = description; }
+
+	public String getPublicationDate() { return publicationDate; }
+
+	public void setPublicationDate(String publicationDate) { this.publicationDate = publicationDate; }
 
 	public Person getPerson() { return person; }
 

@@ -1,17 +1,16 @@
 <%@ include file="header.jsp"%>
 <div class="container">
 	<div class="row">
-		<div class="card mb-3" style="margin-top:10px;">
+		<div class="col-sm-12">
+			<h2>
+				${topo.name}
+				<c:if test="${topo.status != 'Libre'}">
+					<i class="fas fa-bookmark"></i>								
+				</c:if>
+			</h2>
 			<c:choose>
 				<c:when test="${!(empty sessionScope.username)}">
-					<div class="col-sm-12">
-						<h2>
-							${topo.name}
-							<c:if test="${topo.status != 'Libre'}">
-								<i class="fas fa-bookmark"></i>								
-							</c:if>
-						</h2>
-						
+					<div class="card mb-3" style="margin-top:10px;">
 						<div class="row no-gutters">
 							<div class="col-md-4">
 								<img src="<c:url value="${topo.image}"/>" class="card-img" alt="...">
@@ -47,18 +46,40 @@
 							</div>
 						</div>
 					</div>
+					<h4 class="card-title">
+						Les commentaires :
+					</h4>
 					<div class="card mb-3" style="margin-top:10px;">
 						<div class="row no-gutters">
 			        		<div class="card col-lg-12 col-sm-12">
 								<div class="card-body">
-									<h4 class="card-title">
-										Les commentaires :
-									</h4>
-									<c:forEach items="${comments}" var="element">
-										<p class="card-text">
-											Le 10/07/2019 - ${element.description}, par <i>${element.person.username }</i>
-										</p>
-									</c:forEach>
+									<c:choose>
+										<c:when test="${!(empty comments)}">
+											<c:forEach items="${comments}" var="element">
+												<p class="card-text">
+													${element.description}, par <i>${element.person.username }</i> - Le ${element.publicationDate} 
+												</p>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<p>Aucun commentaire pour le moment, soyez le premier !</p>
+										</c:otherwise>
+									</c:choose>
+									<hr/>
+									<c:choose>
+										<c:when test="${!(empty sessionScope.username)}">
+											<form action="<c:url value="/addCommentTopo/${topo.person.id}/${topo.id}" />"
+												  method='POST'>
+									    		<label for='comment'>Commentaire :</label>
+									    		<textarea id='description' name='description' class="form-control" placeholder='Un commentaire ?' rows='3' cols='50' required ></textarea><br/>
+									    		<input type='submit' value='Valider'/>
+									    	</form>
+										</c:when>
+										<c:otherwise>
+											<b>Veuillez vous connecter pour pouvoir ajouter un commentaire. Merci :)</b>
+											<p><a href="<c:url value="/connexion"/>"> > Page de connexion</a></p>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 						</div>

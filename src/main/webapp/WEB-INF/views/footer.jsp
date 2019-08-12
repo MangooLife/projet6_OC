@@ -63,5 +63,7 @@
 			</div>
 		</footer>
 		<script src="<c:url value="/resources/js/navBar.js" />"></script>
+		<script src="<c:url value="https://cloud.tinymce.com/stable/tinymce.min.js" />"</script>
+        <script>tinymce.init({ selector:'textarea' });</script>
     </body>
 </html>

@@ -30,12 +30,11 @@ public class TopoController {
     }
 
     @GetMapping("/topo/{id}")
-    public String site(@PathVariable("id") final Long id, Model model) throws ResourceNotFoundException {
+    public ModelAndView topo(@PathVariable("id") final Long id, Model model) throws ResourceNotFoundException {
     	Topo topo = topoService.getTopo(id).orElseThrow(() -> new ResourceNotFoundException(id, "Topo"));
      	model.addAttribute("comments", topo.getComments());
-     	model.addAttribute("topo", topo);  
      	model.addAttribute("sites", topo.getTopoSites());
-     	return "topo";
+     	return new ModelAndView("topo", "topo", topo);
     }
        
 }

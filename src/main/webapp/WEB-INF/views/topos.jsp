@@ -25,7 +25,7 @@
 	        		</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<h2>Veuillez vous connecter pour accèder aux topos. Merci :)</h2>
+					<h2>Veuillez vous connecter pour accéder aux topos. Merci :)</h2>
 					<p><a href="<c:url value="/connexion"/>"> > Page de connexion</a></p>
 				</c:otherwise>
 			</c:choose>
