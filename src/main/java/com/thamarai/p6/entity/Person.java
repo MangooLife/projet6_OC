@@ -4,7 +4,6 @@ package com.thamarai.p6.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,20 +39,24 @@ public class Person {
     private String password;
 	
 	@Column(name = "status")
-    private String status;
+    private Integer status;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person")
     @OrderBy
     private Set<Topo> topos = new HashSet<Topo>();
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person")
+    @OrderBy
+    private Set<Site> sites = new HashSet<Site>();
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person")
     @OrderBy
     private Set<Comment> comments = new HashSet<Comment>();
 
     public Person() {
     }
 
-    public Person(String firstname, String lastname, String username, String birthdate, String password, String status) {
+    public Person(String firstname, String lastname, String username, String birthdate, String password, Integer status) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -86,13 +89,17 @@ public class Person {
 
 	public void setPassword(String password) { this.password = password; }
 
-	public String getStatus() { return status; }
+	public Integer getStatus() { return status; }
 
-	public void setStatus(String status) { this.status = status; }
+	public void setStatus(Integer status) { this.status = status; }
 
 	public Set<Topo> getTopos() { return topos; }
 
 	public void setTopos(Set<Topo> topos) { this.topos = topos; }
+
+	public Set<Site> getSites() { return sites; }
+
+	public void setSites(Set<Site> sites) { this.sites = sites; }
 
 	public Set<Comment> getComments() { return comments; }
 

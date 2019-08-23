@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.thamarai.p6.entity.Person;
-import com.thamarai.p6.service.CommentService;
 import com.thamarai.p6.service.PersonService;
 
 @Controller
@@ -23,9 +22,6 @@ public class ConnexionController {
 
 	@Autowired
 	PersonService personService;
-	
-	@Autowired
-	CommentService commentService;
 
 	@RequestMapping("/connexion")
 	public String connexion(Model model) {
@@ -85,7 +81,7 @@ public class ConnexionController {
 		person.setBirthdate(birthdate);
 		person.setUsername(username);
 		person.setPassword(password);
-		person.setStatus("Member");
+		person.setStatus(0);
 		personService.addPerson(person);
 		session.setAttribute("firstname", person.getFirstname());
 		session.setAttribute("lastname", person.getLastname());
@@ -101,6 +97,7 @@ public class ConnexionController {
 			Person person = personService.authentificateUser(username).orElse(null);
 			model.addAttribute("person", person);
 			model.addAttribute("topos", person.getTopos());
+			model.addAttribute("sites", person.getSites());
 			model.addAttribute("comments", person.getComments());
 			return new ModelAndView("person");
 			

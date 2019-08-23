@@ -17,7 +17,7 @@
 								<div class="card-body">
 									<h5 class="card-title">
 										${element.name}
-										<c:if test="${element.label}">
+										<c:if test="${element.label == 1}">
 											<i class="fas fa-check-circle"></i>
 										</c:if>
 									</h5>

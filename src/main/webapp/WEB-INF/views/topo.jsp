@@ -13,7 +13,15 @@
 					<div class="card mb-3" style="margin-top:10px;">
 						<div class="row no-gutters">
 							<div class="col-md-4">
-								<img src="<c:url value="${topo.image}"/>" class="card-img" alt="...">
+								<c:choose>
+									<c:when test="${!(empty topo.image)}">
+										<img src="<c:url value="${topo.image}"/>" class="card-img" alt="...">
+									</c:when>
+									<c:otherwise>
+										<img src="<c:url value="/resources/image/LADE.png"/>"  
+										     width="200" height="300" class="card-img-top" alt="..." />
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">
@@ -57,7 +65,8 @@
 										<c:when test="${!(empty comments)}">
 											<c:forEach items="${comments}" var="element">
 												<p class="card-text">
-													${element.description}, par <i>${element.person.username }</i> - Le ${element.publicationDate} 
+													<c:out value="${element.description}" />, par <i><c:out value="${element.person.username }"/></i> 
+													- Le <c:out value="${element.publicationDate}"/> 
 												</p>
 											</c:forEach>
 										</c:when>

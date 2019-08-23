@@ -3,13 +3,13 @@ package com.thamarai.p6.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -28,7 +28,7 @@ public class Site {
     private String name;
     
     @Column(name = "label")
-    private String label;
+    private Integer label;
     
     @Column(name = "description")
     private String description;
@@ -36,14 +36,16 @@ public class Site {
     @Column(name = "image")
     private String image;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="person_id", referencedColumnName = "id")
+    @OrderBy
     private Person person;
     
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "site")
     @OrderBy
     private Set<Secteur> secteurs = new HashSet<Secteur>();
     
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "site", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "site")
     @OrderBy
     private Set<Comment> comments = new HashSet<Comment>();
     
@@ -60,9 +62,9 @@ public class Site {
 
 	public void setName(String name) { this.name = name; }
 
-	public String getLabel() { return label; }
+	public Integer getLabel() { return label; }
 
-	public void setLabel(String label) { this.label = label; }
+	public void setLabel(Integer label) { this.label = label; }
 
 	public Person getPerson() { return person; }
 

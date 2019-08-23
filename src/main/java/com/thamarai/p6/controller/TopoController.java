@@ -1,5 +1,13 @@
 package com.thamarai.p6.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.servlet.http.HttpSession;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +16,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.thamarai.p6.Exception.ResourceNotFoundException;
+import com.thamarai.p6.entity.Person;
+import com.thamarai.p6.entity.Site;
 import com.thamarai.p6.entity.Topo;
+import com.thamarai.p6.service.PersonService;
+import com.thamarai.p6.service.SiteService;
 import com.thamarai.p6.service.TopoService;
 
 @Controller
@@ -21,12 +37,24 @@ public class TopoController {
     
     @Autowired
     TopoService topoService;
+    
+    @Autowired
+    SiteService siteService;
 
+    @Autowired 
+    PersonService personService;
+  
+    @Autowired
+    ConnexionController connexionController;
+    
+    @Autowired 
+    CommonsMultipartFileController commonsMultipartFileController;
 
     @RequestMapping("/topos")
-    public ModelAndView topos() {
+    public ModelAndView topos(Model model) {
         LOGGER.debug("Topos page OK");
-        return new ModelAndView("topos", "topos", topoService.getAllTopos());
+        List<Topo> topos = topoService.getAllTopos();
+        return new ModelAndView("topos", "topos", topos);
     }
 
     @GetMapping("/topo/{id}")
@@ -36,5 +64,45 @@ public class TopoController {
      	model.addAttribute("sites", topo.getTopoSites());
      	return new ModelAndView("topo", "topo", topo);
     }
-       
+    
+    @RequestMapping(value = {"/addTopo/{id}/"}, headers = "content-type=multipart/*", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView addTopo(
+    		HttpSession session,
+    		Model model,
+    		@PathVariable("id") Long personId,
+    		@RequestParam("topoName") String topoName,
+    		@RequestParam("description") String description,
+    		@RequestParam("topoImage") CommonsMultipartFile topoImage,
+    		@RequestParam("sites") List<Long> sites
+    ) {
+    	commonsMultipartFileController.upload(topoImage, session);
+    	LOGGER.info("Image chargée");
+    	String filename = topoImage.getOriginalFilename(); 
+    	Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Person person = personService.getPerson(personId).get();
+    	Topo topo = new Topo();
+    	topo.setName(topoName);
+    	topo.setDescription(description);
+    	topo.setParutionDate(formatter.format(date));
+    	topo.setStatus("false");
+    	topo.setPerson(person); 
+    	topo.setImage("/resources/image/download/"+filename);
+    	Set<Site> sitesList = new HashSet<Site>();
+    	for(int i = 0; i < sites.size(); i++) {
+    		Site site;
+			try {
+				site = siteService.getSite(sites.get(i)).get();
+				sitesList.add(site);
+			} catch (ResourceNotFoundException e) {
+				e.printStackTrace();
+			}
+    	}
+    	topo.setTopoSites(sitesList);
+    	topoService.addTopo(topo);
+    	
+    	return connexionController.member(session, model);    
+    }
+
 }

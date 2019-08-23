@@ -4,15 +4,23 @@
 		<div class="col-sm-12">
 			<h2>
 				${site.name}
-				<c:if test="${site.label}">
+				<c:if test="${site.label == 1}">
 					<i class="fas fa-check-circle"></i>
 				</c:if>
 			</h2>
 			<div class="card mb-3" style="margin-top:10px;">
 				<div class="row no-gutters">
-					<div class="col-md-6">
-						<img src="<c:url value="${site.image}"/>" class="img-thumbnail float-left" alt="...">
-					</div>
+					<c:if test="${element.image}">
+						<div class="col-md-6">
+							<img src="<c:url value="${site.image}"/>" class="img-thumbnail float-left" alt="...">
+						</div>
+					</c:if>
+					<c:if test="${(empty element.image)}">
+						<div class="col-md-6">
+							<img src="<c:url value="/resources/image/LADE.png"/>"  
+							width="200" height="300" class="card-img-top" alt="..." />
+						</div>
+					</c:if>
 					<div class="col-md-6">
 						<div class="card-body">
 							<h3>${site.name}</h3>
@@ -117,7 +125,8 @@
 								<c:when test="${!(empty comments)}">
 									<c:forEach items="${comments}" var="element">
 										<p class="card-text">
-											${element.description}, par <i>${element.person.username }</i> - Le ${element.publicationDate} 
+											<c:out value="${element.description}" />, par <i><c:out value="${element.person.username}"/></i> 
+											- Le <c:out value="${element.publicationDate}" /> 
 										</p>
 									</c:forEach>
 								</c:when>

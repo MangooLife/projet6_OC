@@ -48,20 +48,26 @@
 									<div class="card-body">
 										<h3 class="card-title">Vos topos :</h3>
 										<ul>
-											<c:if test="${topos != null}">
-											<c:forEach items="${topos}" var="element">
-													<li>
-														<a href="./topo/${element.id}" target="_blank">
-															${element.name}
-														</a>
-													</li>
-												</c:forEach>
-											</c:if>
+											<c:choose>
+												<c:when test="${!(empty topos)}">
+													<c:forEach items="${topos}" var="element">
+														<li>
+															<a href=<c:url value="/topo/${element.id}"/> target="_blank">
+																${element.name}
+															</a>
+														</li>
+													</c:forEach>
+												</c:when>
+												<c:otherwise>
+													<li>Pas de topos pour le moment</li>
+												</c:otherwise>
+											</c:choose>
 										</ul>
 									</div>
 								</div>
 							</div>
 						</div>
+						<%@ include file="newTopo.jsp"%>
 					</div>
 					<div class="tab-pane fade" id="sites" role="tabpanel" aria-labelledby="sites-tab">
 						<div class="card mb-3" style="margin-top:10px;">
@@ -70,22 +76,28 @@
 									<div class="card-body">
 										<h3 class="card-title">Vos sites :</h3>
 										<ul>
-											<c:if test="${topos != null}">
-												<c:forEach items="${topos}" var="element">
-													<c:forEach items="${element.topoSites}" var="element2">
-														<li>
-															<a href="./site/${element2.id}" target="_blank">
-																${element2.name}
-															</a>
-														</li>
+											<c:choose>
+												<c:when test="${!(empty topos)}">
+													<c:forEach items="${topos}" var="element">
+														<c:forEach items="${element.topoSites}" var="element2">
+															<li>
+																<a href="./site/${element2.id}" target="_blank">
+																	${element2.name}
+																</a>
+															</li>
+														</c:forEach>
 													</c:forEach>
-												</c:forEach>
-											</c:if>
+												</c:when>
+												<c:otherwise>
+													<li>Pas de sites pour le moment</li>
+												</c:otherwise>
+											</c:choose>
 										</ul>
 									</div>
 								</div>
 							</div>
 						</div>
+						<%@ include file="newSite.jsp"%>
 					</div>
 					<div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
 						<div class="card mb-3" style="margin-top:10px;">
@@ -94,25 +106,31 @@
 									<div class="card-body">
 										<h3 class="card-title">Vos commentaires :</h3>
 										<ul>
-											<c:if test="${comments != null}">
-												<c:forEach items="${comments}" var="element">
-													<li>
-														<p>
-															${element.description}
-														</p>
-														<c:if test="${!empty element.topo}">
-															<a href="./site/${element.topo.id}" target="_blank">
-																<b>Voir le site</b>
-															</a>
-														</c:if>
-														<c:if test="${!empty element.site}">
-															<a href="./topo/${element.site.id}" target="_blank">
-																<b>Voir la topo</b>
-															</a>
-														</c:if>
-													</li>
-												</c:forEach>
-											</c:if>
+											<c:choose>
+												<c:when test="${!(empty comments)}">
+													<c:forEach items="${comments}" var="element">
+														<li>
+															<p>
+																<c:out value="${element.description}" />, par <i><c:out value="${element.person.username}"/></i> 
+																- Le <c:out value="${element.publicationDate}"/>
+															</p>
+															<c:if test="${!empty element.topo}">
+																<a href="./site/${element.topo.id}" target="_blank">
+																	<b>Voir le site</b>
+																</a>
+															</c:if>
+															<c:if test="${!empty element.site}">
+																<a href="./topo/${element.site.id}" target="_blank">
+																	<b>Voir la topo</b>
+																</a>
+															</c:if>
+														</li>
+													</c:forEach>
+												</c:when>
+												<c:otherwise>
+													<li>Pas de commentaires pour le moment</li>
+												</c:otherwise>
+											</c:choose>
 										</ul>
 									</div>
 								</div>

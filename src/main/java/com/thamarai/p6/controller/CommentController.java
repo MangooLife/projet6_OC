@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +38,9 @@ public class CommentController {
 	
 	@Autowired
 	TopoController topoController;
+	
+	@Autowired
+	AdminController adminController;
 	
 	@RequestMapping(value = {"/addCommentSite/{person}/{site}"}, method = RequestMethod.POST)
 	@ResponseBody
@@ -80,4 +84,26 @@ public class CommentController {
 		return comment;
 	}
 
+	@GetMapping("/deleteComment/{id}")
+    public String deleteComment(
+    		Model model,
+    		@PathVariable("id") Long commentId
+    ) {
+    	commentService.deleteComment(commentId);
+    	LOGGER.info("comment's successfully delete");
+    	return adminController.adminPage(model);
+    }
+	
+	@RequestMapping(value = {"/updateTopo/{id}"}, method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView updateComment(
+		Model model,
+		@PathVariable("id") Long id,
+		@RequestParam("description") String description
+	)  throws ResourceNotFoundException {
+		Comment comment = commentService.getComment(id).get();
+		comment.setDescription(description);
+		commentService.updateComment(id, comment);
+		return new ModelAndView("redirect:/admin");
+	}
 }

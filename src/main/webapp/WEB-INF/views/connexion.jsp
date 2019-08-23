@@ -11,7 +11,7 @@
 					</div>
 					
 					<!-- login Form -->
-					<form action="<c:url value="/authentificate" />" method="post">
+					<form action="<c:url value="/authentificate" />" method="post" content="text/html;charset=UTF-8">
 						<input type="text" id="username" class="fadeIn second" name="username" placeholder="Login" required>
 						<input type="password" id="password" class="fadeIn third" name="password" placeholder="Mot de passe" required>
 						<input type="submit" class="fadeIn fourth" value="Connexion">

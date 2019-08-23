@@ -3,7 +3,6 @@ package com.thamarai.p6.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -54,7 +53,7 @@ public class Topo {
     @OrderBy
     private Booking booking;
     
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "topo", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "topo")
     @OrderBy
     private Set<Comment> comments = new HashSet<Comment>();
 

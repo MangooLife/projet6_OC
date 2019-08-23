@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "db_projet6_OC.comment")
 public class Comment {
@@ -26,16 +29,19 @@ public class Comment {
     private String publicationDate;
     
 	@ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="person_id", referencedColumnName = "id")
 	@OrderBy
     private Person person;
 
 	@ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="topo_id", referencedColumnName = "id")
     @OrderBy
     private Topo topo;
     
     @ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="site_id", referencedColumnName = "id")
     @OrderBy
     private Site site;

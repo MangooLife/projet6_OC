@@ -40,7 +40,7 @@ public class SiteService {
 		siteRepository.save(site);
 	}
 	
-	public void updateSite(String id, Site site) throws ResourceNotFoundException {
+	public void updateSite(Long id, Site site) throws ResourceNotFoundException {
 		siteRepository.save(site);
 	}
 	

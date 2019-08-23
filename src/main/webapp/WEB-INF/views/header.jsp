@@ -72,6 +72,13 @@ pageEncoding="UTF-8"%>
 										Espace membre
 									</a>
 								</li>
+								<c:if test="${(sessionScope.admin == 1)}">
+									<li>
+										 <a class="nav-link" href="<c:url value="/admin"/>">
+											Espace admin
+										</a>
+									</li>
+								</c:if>
 						    	<li class="nav-item">
 									<a class="nav-link" href="<c:url value="/deconnexion"/>">
 										Se déconnecter
@@ -82,12 +89,6 @@ pageEncoding="UTF-8"%>
 						</c:choose>
 						
 					</ul>
-					<form class="form-inline search">
-						<input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search">
-						<button class="btn" type="submit">
-							<i class="fas fa-search"></i>
-						</button>
-					</form>
 				</div>
 			</nav>
 		</header>
