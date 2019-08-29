@@ -10,17 +10,17 @@
 			</h2>
 			<div class="card mb-3" style="margin-top:10px;">
 				<div class="row no-gutters">
-					<c:if test="${element.image}">
-						<div class="col-md-6">
-							<img src="<c:url value="${site.image}"/>" class="img-thumbnail float-left" alt="...">
-						</div>
-					</c:if>
-					<c:if test="${(empty element.image)}">
-						<div class="col-md-6">
-							<img src="<c:url value="/resources/image/LADE.png"/>"  
-							width="200" height="300" class="card-img-top" alt="..." />
-						</div>
-					</c:if>
+					<div class="col-md-4">
+						<c:choose>
+							<c:when test="${!(empty site.image)}">
+								<img src="<c:url value="${site.image}"/>" class="card-img" alt="...">
+							</c:when>
+							<c:otherwise>
+								<img src="<c:url value="/resources/image/LADE.png"/>"  
+								     width="200" height="300" class="card-img-top" alt="..." />
+							</c:otherwise>
+						</c:choose>
+					</div>
 					<div class="col-md-6">
 						<div class="card-body">
 							<h3>${site.name}</h3>

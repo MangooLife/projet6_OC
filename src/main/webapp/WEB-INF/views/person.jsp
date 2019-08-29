@@ -15,8 +15,8 @@
 							role="tab" aria-controls="topos" aria-selected="false">Topos</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" id="sites-tab" data-toggle="tab" href="#sites" 
-							role="tab" aria-controls="sites" aria-selected="false">Sites</a>
+						<a class="nav-link" id="sites-tab" data-toggle="tab" href="#sitesPage" 
+							role="tab" aria-controls="sitesPage" aria-selected="false">Sites</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments" 
@@ -69,7 +69,7 @@
 						</div>
 						<%@ include file="newTopo.jsp"%>
 					</div>
-					<div class="tab-pane fade" id="sites" role="tabpanel" aria-labelledby="sites-tab">
+					<div class="tab-pane fade" id="sitesPage" role="tabpanel" aria-labelledby="sites-tab">
 						<div class="card mb-3" style="margin-top:10px;">
 							<div class="row no-gutters">
 								<div class="col-md-12">
@@ -77,15 +77,13 @@
 										<h3 class="card-title">Vos sites :</h3>
 										<ul>
 											<c:choose>
-												<c:when test="${!(empty topos)}">
-													<c:forEach items="${topos}" var="element">
-														<c:forEach items="${element.topoSites}" var="element2">
-															<li>
-																<a href="./site/${element2.id}" target="_blank">
-																	${element2.name}
-																</a>
-															</li>
-														</c:forEach>
+												<c:when test="${!(empty sites)}">
+													<c:forEach items="${sites}" var="element">
+														<li>
+															<a href="./site/${element.id}" target="_blank">
+																${element.name}
+															</a>
+														</li>
 													</c:forEach>
 												</c:when>
 												<c:otherwise>
@@ -115,13 +113,13 @@
 																- Le <c:out value="${element.publicationDate}"/>
 															</p>
 															<c:if test="${!empty element.topo}">
-																<a href="./site/${element.topo.id}" target="_blank">
-																	<b>Voir le site</b>
+																<a href="./topo/${element.topo.id}" target="_blank">
+																	<b>Voir le topo</b>
 																</a>
 															</c:if>
 															<c:if test="${!empty element.site}">
-																<a href="./topo/${element.site.id}" target="_blank">
-																	<b>Voir la topo</b>
+																<a href="./site/${element.site.id}" target="_blank">
+																	<b>Voir la site</b>
 																</a>
 															</c:if>
 														</li>

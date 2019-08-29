@@ -3,17 +3,24 @@
 		<div class="col-md-12">
 			<div class="card-body">
 				<h3>
-					Ajouter un site :
+					Ajouter et "composer" un site :
 				</h3>
-				<form action="<c:url value="/addTopo/${site.person.id}" />"
-					  method='POST' content="text/html;charset=UTF-8">
-					<input type="text" id="nameTopo" class="fadeIn second" name="nameTopo" placeholder="Nom du site" required>
-		    		<textarea id="description" class="fadeIn second" name="description"  placeholder="Description du site..."
-		    				  rows="3" required ></textarea>
-		    		<input type="file" id="imageTopo" class="fadeIn second" name="imageTopo" required>	  
-		    		<br/>
-		    		<input type="submit" value="Valider"/>
-		    	</form>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSite">
+					Etape 1 : Ajouter un site +
+				</button>
+				<%@ include file="createSite.jsp"%>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSecteur">
+					Etape 2 : Ajouter un secteur +
+				</button>
+				<%@ include file="createSecteur.jsp"%>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addVoie">
+					Etape 3 : Ajouter une voie +
+				</button>
+				<%@ include file="createVoie.jsp"%>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLongueur">
+					Etape 4 : Ajouter une longueur +
+				</button>
+				<%@ include file="createLongueur.jsp"%>
 			</div>
 		</div>
 	</div>

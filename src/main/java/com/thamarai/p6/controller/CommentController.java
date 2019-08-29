@@ -85,16 +85,16 @@ public class CommentController {
 	}
 
 	@GetMapping("/deleteComment/{id}")
-    public String deleteComment(
+    public ModelAndView deleteComment(
     		Model model,
     		@PathVariable("id") Long commentId
     ) {
     	commentService.deleteComment(commentId);
     	LOGGER.info("comment's successfully delete");
-    	return adminController.adminPage(model);
+    	return new ModelAndView("redirect:/admin");
     }
 	
-	@RequestMapping(value = {"/updateTopo/{id}"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/updateComment/{id}"}, method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView updateComment(
 		Model model,
