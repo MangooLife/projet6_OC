@@ -37,4 +37,9 @@ public class SecteurService {
 	public void deleteSecteur(Long id) {
 		secteurRepository.deleteById(id);
 	}
+	
+	
+	public List<Secteur> getAllSecteursByKeyword(String keyword) {
+		return secteurRepository.getAllSecteursByKeywordRepo(keyword);
+	}
 }

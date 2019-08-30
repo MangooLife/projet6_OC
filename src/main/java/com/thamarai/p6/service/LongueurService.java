@@ -22,6 +22,11 @@ public class LongueurService {
 		return longueurs;
 	}
 	
+	
+	public List<Longueur> getAllLongueursByKey(String cotationLongueur, String widthLongueur, String spitLongueur) {
+		return longueurRepository.getAllLongueursByKeyRepo(cotationLongueur, widthLongueur, spitLongueur);
+	}
+	
 	public Optional<Longueur> getLongueur(Long id) {
 		return longueurRepository.findById(id);
 	}

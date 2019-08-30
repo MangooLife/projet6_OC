@@ -36,6 +36,10 @@ public class SiteService {
 		return siteRepository.findById(id);
 	}
 	
+	public List<Site> getAllSitesByKeyword(String keyword) {
+		return siteRepository.getAllSitesByKeywordRepo(keyword);
+	}
+	
 	public void addSite(Site site) {
 		siteRepository.save(site);
 	}

@@ -31,7 +31,7 @@ public class Longueur {
     @Column(name = "width")
     private String width;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="voie_id")
     @OrderBy
     private Voie voie;

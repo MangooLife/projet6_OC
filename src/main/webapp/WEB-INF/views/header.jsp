@@ -46,16 +46,27 @@ pageEncoding="UTF-8"%>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link" href="<c:url value="/"/>">Accueil</a>
+							<a class="nav-link" href="<c:url value="/"/>">
+								<i class="fas fa-home"></i>
+							</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="<c:url value="/topos"/>">Topos</a>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Topo info</a>
+							<div class="dropdown-menu">
+								<a class="nav-link" href="<c:url value="/topos"/>">Topos</a>
+								<div class="dropdown-divider"></div>
+								<a class="nav-link" href="<c:url value="/booking"/>">Réserver</a>
+							</div>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="<c:url value="/sites"/>">Sites</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="<c:url value="/booking"/>">Réserver</a>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Site info</a>
+							<div class="dropdown-menu">
+								<a class="nav-link" href="<c:url value="/sites"/>">Sites</a>
+								<div class="dropdown-divider"></div>
+								<a class="nav-link" href="<c:url value="/searchASite"/>">
+									Rechercher un site
+								</a>
+							</div>
 						</li>
 						<c:choose>
 						    <c:when test="${empty sessionScope.username}">
@@ -67,19 +78,21 @@ pageEncoding="UTF-8"%>
 								</li>
 						    </c:when>    
 						    <c:otherwise>
-						    	<li class="nav-item">
-							        <a class="nav-link" href="<c:url value="/member"/>">
-										Espace membre
-									</a>
-								</li>
-								<c:if test="${(sessionScope.admin == 1)}">
-									<li>
-										 <a class="nav-link" href="<c:url value="/admin"/>">
-											Espace admin
+								 <li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Espace</a>
+									<div class="dropdown-menu">
+										 <a class="nav-link" href="<c:url value="/member"/>">
+											Membre
 										</a>
-									</li>
-								</c:if>
-						    	<li class="nav-item">
+									<div class="dropdown-divider"></div>
+										<c:if test="${(sessionScope.admin == 1)}">
+											 <a class="nav-link" href="<c:url value="/admin"/>">
+												Admin
+											</a>
+										</c:if>
+									</div>
+								</li>
+								<li class="nav-item">
 									<a class="nav-link" href="<c:url value="/deconnexion"/>">
 										Se déconnecter
 										<i class="fas fa-power-off on"></i>
@@ -87,7 +100,6 @@ pageEncoding="UTF-8"%>
 								</li>
 						    </c:otherwise>
 						</c:choose>
-						
 					</ul>
 				</div>
 			</nav>

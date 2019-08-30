@@ -37,4 +37,8 @@ public class VoieService {
 	public void deleteVoie(Long id) {
 		voieRepository.deleteById(id);
 	}
+	
+	public List<Voie> getAllVoiesByKey(String cotationVoie, String widthVoie) {
+		return voieRepository.getAllVoiesBySomeKey(cotationVoie, widthVoie);
+	};
 }
