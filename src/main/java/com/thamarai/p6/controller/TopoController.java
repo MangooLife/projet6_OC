@@ -21,11 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thamarai.p6.Exception.ResourceNotFoundException;
+import com.thamarai.p6.entity.Booking;
 import com.thamarai.p6.entity.Person;
 import com.thamarai.p6.entity.Site;
 import com.thamarai.p6.entity.Topo;
+import com.thamarai.p6.service.BookingService;
 import com.thamarai.p6.service.PersonService;
 import com.thamarai.p6.service.SiteService;
 import com.thamarai.p6.service.TopoService;
@@ -43,9 +46,9 @@ public class TopoController {
 
     @Autowired 
     PersonService personService;
-  
+    
     @Autowired
-    ConnexionController connexionController;
+    BookingService bookingService;
     
     @Autowired 
     CommonsMultipartFileController commonsMultipartFileController;
@@ -70,6 +73,7 @@ public class TopoController {
     public ModelAndView addTopo(
     		HttpSession session,
     		Model model,
+    		RedirectAttributes redirectAttributes,
     		@PathVariable("id") Long personId,
     		@RequestParam("topoName") String topoName,
     		@RequestParam("description") String description,
@@ -86,9 +90,13 @@ public class TopoController {
     	topo.setName(topoName);
     	topo.setDescription(description);
     	topo.setParutionDate(formatter.format(date));
-    	topo.setStatus("false");
+    	topo.setStatus(0);
     	topo.setPerson(person); 
-    	topo.setImage("/resources/image/download/"+filename);
+    	if (!filename.isEmpty()) {
+    		topo.setImage("/resources/image/download/"+filename);
+    	} else {
+    		topo.setImage("/resources/image/LADE.png");
+    	}
     	Set<Site> sitesList = new HashSet<Site>();
     	for(int i = 0; i < sites.size(); i++) {
     		Site site;
@@ -101,8 +109,40 @@ public class TopoController {
     	}
     	topo.setTopoSites(sitesList);
     	topoService.addTopo(topo);
+
+		session.removeAttribute("classActiveProfil");
+		session.removeAttribute("classActiveSitesPage");
+		session.removeAttribute("classActiveReservation");
+		session.setAttribute("classActiveTopos","active");
+    	redirectAttributes.addFlashAttribute(
+    			"message", "Topo créée avec succès");
+    	return new ModelAndView("redirect:/person");    
+    }
+    
+    @GetMapping("/topoStatus/{id}")
+    public ModelAndView topoStatus(
+    		@PathVariable("id") final Long id, 
+    		Model model,
+    		HttpSession session,
+    		RedirectAttributes redirectAttributes
+    ) throws ResourceNotFoundException {
+    	Topo topo = topoService.getTopo(id).get();
+    	topo.setStatus(0);
     	
-    	return connexionController.member(session, model);    
+    	Booking booking  = bookingService.getBooking(topo.getBooking().getId()).get();
+    	booking.setBookingPerson(null);
+    	bookingService.updateBooking(booking.getId(), booking);
+    	
+    	topo.setBooking(null);
+    	topoService.updateTopo(id, topo);
+
+		session.removeAttribute("classActiveProfil");
+		session.removeAttribute("classActiveSitesPage");
+		session.removeAttribute("classActiveReservation");
+		session.setAttribute("classActiveTopos","active");
+    	redirectAttributes.addFlashAttribute(
+    			"message", "Status de la topo changé avec succès");
+     	return new ModelAndView("redirect:/person");
     }
 
 }

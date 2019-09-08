@@ -41,7 +41,7 @@ public class SearchController {
 
 	@RequestMapping(value = {"/searchASite"})
     @ResponseBody
-    public ModelAndView sites(
+    public ModelAndView searchASite(
     		Model model
     ) {
     	LOGGER.debug("Search page OK");
@@ -57,7 +57,7 @@ public class SearchController {
 	
 	@RequestMapping(value = {"/searchSitePerkeyword"}, method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView addTopo(
+    public ModelAndView searchSitePerKeyword(
     		Model model,
     		@RequestParam("keyword") String keyword
     ) {
@@ -70,7 +70,7 @@ public class SearchController {
 	
 	@RequestMapping(value = {"/searchSiteByVoie"}, method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView addTopo(
+    public ModelAndView searchSiteByVoie(
     		Model model,
     		@RequestParam("cotationVoie") String cotationVoie,
     		@RequestParam("widthVoie") String widthVoie
@@ -81,7 +81,7 @@ public class SearchController {
 	
 	@RequestMapping(value = {"/searchSitePerLongueur"}, method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView addTopo(
+    public ModelAndView searchSitePerLongueur(
     		Model model,
     		@RequestParam("cotationLongueur") String cotationLongueur,
     		@RequestParam("widthLongueur") String widthLongueur,

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thamarai.p6.Exception.ResourceNotFoundException;
 import com.thamarai.p6.entity.Comment;
@@ -38,9 +39,6 @@ public class CommentController {
 	
 	@Autowired
 	TopoController topoController;
-	
-	@Autowired
-	AdminController adminController;
 	
 	@RequestMapping(value = {"/addCommentSite/{person}/{site}"}, method = RequestMethod.POST)
 	@ResponseBody
@@ -84,26 +82,60 @@ public class CommentController {
 		return comment;
 	}
 
-	@GetMapping("/deleteComment/{id}")
+	@GetMapping("/deleteComment/{id}/{page}")
     public ModelAndView deleteComment(
     		Model model,
-    		@PathVariable("id") Long commentId
+			HttpSession session,
+    		RedirectAttributes redirectAttributes,
+    		@PathVariable("id") Long commentId,
+    		@PathVariable("page") String page
     ) {
+		Comment comment = commentService.getComment(commentId).get();
     	commentService.deleteComment(commentId);
     	LOGGER.info("comment's successfully delete");
-    	return new ModelAndView("redirect:/admin");
+
+		session.removeAttribute("classActiveMember");
+		session.removeAttribute("classActiveLabel");
+		session.setAttribute("classActiveComment","active");
+		
+
+		redirectAttributes.addFlashAttribute(
+    			"message", "Commentaire supprimé avec succès");
+		
+		if(page.equals("topo")) {
+	    	return new ModelAndView("redirect:/topo/"+comment.getTopo().getId());
+		} else if(page.equals("site")) {
+	    	return new ModelAndView("redirect:/site/"+comment.getSite().getId());
+		} else{
+	    	return new ModelAndView("redirect:/member");
+		}
     }
 	
-	@RequestMapping(value = {"/updateComment/{id}"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/updateComment/{id}/{page}"}, method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView updateComment(
 		Model model,
+		HttpSession session,
+		RedirectAttributes redirectAttributes,
 		@PathVariable("id") Long id,
+		@PathVariable("page") String page,
 		@RequestParam("description") String description
 	)  throws ResourceNotFoundException {
 		Comment comment = commentService.getComment(id).get();
 		comment.setDescription(description);
 		commentService.updateComment(id, comment);
-		return new ModelAndView("redirect:/admin");
+
+		session.removeAttribute("classActiveMember");
+		session.removeAttribute("classActiveLabel");
+		session.setAttribute("classActiveComment","active");
+		redirectAttributes.addFlashAttribute(
+    			"message", "Commentaire modifié avec succès");
+		if(page.equals("topo")) {
+	    	return new ModelAndView("redirect:/topo/"+comment.getTopo().getId());
+		} else if(page.equals("site")) {
+	    	return new ModelAndView("redirect:/site/"+comment.getSite().getId());
+		} else {
+	    	return new ModelAndView("redirect:/member");
+		}
 	}
 }

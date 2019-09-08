@@ -4,10 +4,15 @@
 		<div class="col-sm-12">
 			<h2>
 				${topo.name}
-				<c:if test="${topo.status != 'Libre'}">
+				<c:if test="${topo.status == 1}">
 					<i class="fas fa-bookmark"></i>								
 				</c:if>
 			</h2>
+			<c:if test="${!(empty message)}">
+				<div class="alert alert-success" role="alert" style="margin: 5px;">
+					${message}
+				</div>
+			</c:if>
 			<c:choose>
 				<c:when test="${!(empty sessionScope.username)}">
 					<div class="card mb-3" style="margin-top:10px;">
@@ -67,6 +72,39 @@
 												<p class="card-text">
 													<c:out value="${element.description}" />, par <i><c:out value="${element.person.username }"/></i> 
 													- Le <c:out value="${element.publicationDate}"/> 
+													<c:if test="${(sessionScope.member == 1)}">
+														<a href="<c:url value="./deleteComment/${element.id}/topo"/>">
+															<button type="button" class="btn btn-danger">Supprimer</button>
+														</a>
+														<button type="button" class="btn btn-warning"
+														data-toggle="modal" data-target="#updateComment${element.id}">
+															Modifier
+														</button>
+														<div class="modal fade" id="updateComment${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+															<div class="modal-dialog" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLabel">Modifier le commentaire</h5>
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body">
+																		<form action="<c:url value="/updateComment/${element.id}/topo"/>"
+																		method='POST'>
+																			<div class="form-group">
+																			<label for='comment'>Commentaire :</label>
+																    		<textarea id='description' name='description' class="form-control" rows='3' cols='50' required >
+																    			<c:out value="${element.description}"/>
+																    		</textarea><br/>
+																			</div>
+																			<input type='submit' value='Valider'/>
+																		</form>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</c:if>
 												</p>
 											</c:forEach>
 										</c:when>

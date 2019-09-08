@@ -38,7 +38,7 @@ public class Topo {
     private String parutionDate;
     
     @Column(name = "status")
-    private String status;
+    private Integer status;
     
     @Column(name = "image")
     private String image;
@@ -86,9 +86,9 @@ public class Topo {
 
 	public void setParutionDate(String parutionDate) { this.parutionDate = parutionDate; }
 
-	public String getStatus() { return status; }
+	public Integer getStatus() { return status; }
 
-	public void setStatus(String status) { this.status = status; }
+	public void setStatus(Integer status) { this.status = status; }
 
 	public String getImage() { return image; }
 

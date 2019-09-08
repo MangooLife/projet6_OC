@@ -81,13 +81,13 @@ pageEncoding="UTF-8"%>
 								 <li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Espace</a>
 									<div class="dropdown-menu">
-										 <a class="nav-link" href="<c:url value="/member"/>">
-											Membre
+										 <a class="nav-link" href="<c:url value="/person"/>">
+											Personnel
 										</a>
-									<div class="dropdown-divider"></div>
-										<c:if test="${(sessionScope.admin == 1)}">
-											 <a class="nav-link" href="<c:url value="/admin"/>">
-												Admin
+										<c:if test="${(sessionScope.member == 1)}">
+											<div class="dropdown-divider"></div>
+											 <a class="nav-link" href="<c:url value="/member"/>">
+												Membre
 											</a>
 										</c:if>
 									</div>

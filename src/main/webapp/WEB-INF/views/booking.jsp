@@ -5,30 +5,41 @@
 			<h2>Réserver une topo</h2>
 			<div class="wrapper">
 				<div id="formContent">
-					<!-- Login Form -->
-					<form>
-						<c:choose>
-						    <c:when test="${empty sessionScope.username}">
-						        <input type="text" id="lastename" class="fadeIn second" name="login" placeholder="Nom" required disabled>
-								<input type="text" id="firstname" class="fadeIn third" name="login" placeholder="Prénom" required disabled>
-						    </c:when>
-						    <c:otherwise>
-								<input type="text" id="lastename" class="fadeIn second" name="login" value="${sessionScope.firstname}" required disabled>
-								<input type="text" id="firstname" class="fadeIn third" name="login" value="${sessionScope.lastname}" required disabled>
-						    </c:otherwise>
-						</c:choose>
-						<div class="form-group form-control-sm">
-						    <select class="form-control" id="topoList">
-						   		<c:forEach items="${topos}" var="element">
-						   			<option>${element.name}</option>
-						   		</c:forEach>
-						    </select>
+					<c:if test="${!(empty message)}">
+						<div class="alert alert-success" role="alert" style="margin: 5px;">
+							${message}
 						</div>
+					</c:if>
+					<!-- Login Form -->
+					<form action="<c:url value="/bookingTopo/${sessionScope.username}" />"
+						method='POST' enctype="multipart/form-data"
+						content="text/html;charset=UTF-8">
 						<c:choose>
 							<c:when test="${empty sessionScope.username}">
-								<input type="submit" class="fadeIn fourth" value="Réserver" disabled>
+								<div class="form-group form-control-sm" style="margin-bottom: 30px;">
+								    <select class="form-control" id="topoList">
+								    	<option>------</option>
+								    </select>
+								    <br/>
+								</div>
+								<div class="alert alert-info" role="alert" style="margin: 5px;">
+									Veuillez vous connecter pour réserver une topo :)
+								</div>
 							</c:when>
 							<c:otherwise>
+								<div class="form-group form-control-sm" style="margin-bottom: 30px;">
+								    <select class="form-control" id="topoList" name="topoList" required>
+								    	<option>------</option>
+								   		<c:forEach items="${topos}" var="element">
+								   			<c:if test="${element.status == 0}">
+								   				<c:if test="${element.person.username != sessionScope.username}">
+								   					<option value="${element.id}">${element.name}</option>
+								   				</c:if>
+								   			</c:if>
+								   		</c:forEach>
+								    </select>
+								    <br/>
+								</div>
 								<input type="submit" class="fadeIn fourth" value="Réserver">
 							</c:otherwise>
 						</c:choose>

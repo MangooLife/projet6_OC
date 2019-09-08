@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -41,6 +42,9 @@ public class Person {
 	@Column(name = "status")
     private Integer status;
 	
+	@Column(name = "email")
+    private String email;
+	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person")
     @OrderBy
     private Set<Topo> topos = new HashSet<Topo>();
@@ -52,6 +56,9 @@ public class Person {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person")
     @OrderBy
     private Set<Comment> comments = new HashSet<Comment>();
+	
+	@ManyToMany(mappedBy = "bookingPerson")
+	private Set<Booking> booking = new HashSet<Booking>();
 
     public Person() {
     }
@@ -92,6 +99,10 @@ public class Person {
 	public Integer getStatus() { return status; }
 
 	public void setStatus(Integer status) { this.status = status; }
+	
+	public String getEmail() { return email; }
+
+	public void setEmail(String email) { this.email = email; }
 
 	public Set<Topo> getTopos() { return topos; }
 
@@ -103,6 +114,10 @@ public class Person {
 
 	public Set<Comment> getComments() { return comments; }
 
-	public void setComments(Set<Comment> comments) { this.comments = comments; }   
+	public void setComments(Set<Comment> comments) { this.comments = comments; }
+
+	public Set<Booking> getBooking() { return booking; }
+
+	public void setBooking(Set<Booking> booking) { this.booking = booking; }  
 	
 }

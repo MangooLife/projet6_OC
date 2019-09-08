@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thamarai.p6.Exception.ResourceNotFoundException;
 import com.thamarai.p6.entity.Longueur;
@@ -52,7 +53,7 @@ public class SiteController {
     VoieService voieService;
     
     @Autowired
-    AdminController adminController;
+    MemberController memberController;
     
     @Autowired
     CommonsMultipartFileController commonsMultipartFileController;
@@ -74,9 +75,10 @@ public class SiteController {
     
     @RequestMapping(value = {"/addSite/{id}/"}, headers = "content-type=multipart/*", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView addTopo(
+    public ModelAndView addSite(
     		HttpSession session,
     		Model model,
+    		RedirectAttributes redirectAttributes,
     		@PathVariable("id") Long personId,
     		@RequestParam("siteName") String siteName,
     		@RequestParam("siteDescription") String siteDescription,
@@ -91,16 +93,28 @@ public class SiteController {
     	site.setLabel(0);
     	site.setDescription(siteDescription);
     	site.setPerson(person); 
-    	site.setImage("/resources/image/download/"+filename);
+    	if (!filename.isEmpty()) {
+    		site.setImage("/resources/image/download/"+filename);
+    	} else {
+    		site.setImage("/resources/image/LADE.png");
+    	}
     	siteService.addSite(site);
-    	return new ModelAndView("redirect:/member#sitePage");    
+
+		session.removeAttribute("classActiveProfil");
+		session.removeAttribute("classActiveReservation");
+		session.removeAttribute("classActiveTopos");
+    	session.setAttribute("classActiveSitesPage","active");
+    	redirectAttributes.addFlashAttribute(
+    			"message", "Site créé avec succès");
+    	return new ModelAndView("redirect:/person");    
     }
     
     @RequestMapping(value = {"/addSecteur"}, method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView addTopo(
+    public ModelAndView addSecteur(
     		HttpSession session,
     		Model model,
+    		RedirectAttributes redirectAttributes,
     		@RequestParam("secteurSite") Long secteurSite,
     		@RequestParam("secteurName") String secteurName
     ) throws ResourceNotFoundException {
@@ -109,14 +123,22 @@ public class SiteController {
     	secteur.setSite(site);
     	secteur.setName(secteurName);
     	secteurService.addSecteur(secteur);
-    	return new ModelAndView("redirect:/member#sitePage");    
+
+		session.removeAttribute("classActiveProfil");
+		session.removeAttribute("classActiveReservation");
+		session.removeAttribute("classActiveTopos");
+		session.setAttribute("classActiveSitesPage","active");
+    	redirectAttributes.addFlashAttribute(
+    			"message", "Secteur créé avec succès");
+    	return new ModelAndView("redirect:/person");    
     }
     
     @RequestMapping(value = {"/addVoie"}, method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView addTopo(
+    public ModelAndView addVoie(
     		HttpSession session,
     		Model model,
+    		RedirectAttributes redirectAttributes,
     		@RequestParam("voieSecteur") Long voieSecteur,
     		@RequestParam("voieName") String voieName,
     		@RequestParam("voieCotation") String voieCotation,
@@ -129,14 +151,22 @@ public class SiteController {
     	voie.setCotation(voieCotation);
     	voie.setWidth(voieWith);
     	voieService.addVoie(voie);
-    	return new ModelAndView("redirect:/member#sitePage");    
+
+		session.removeAttribute("classActiveProfil");
+		session.removeAttribute("classActiveReservation");
+		session.removeAttribute("classActiveTopos");
+		session.setAttribute("classActiveSitesPage","active");
+    	redirectAttributes.addFlashAttribute(
+    			"message", "Voie créée avec succès");
+    	return new ModelAndView("redirect:/person");    
     }
     
     @RequestMapping(value = {"/addLongueur"}, method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView addTopo(
+    public ModelAndView addLongueur(
     		HttpSession session,
     		Model model,
+    		RedirectAttributes redirectAttributes,
     		@RequestParam("longueurVoie") Long longueurVoie,
     		@RequestParam("longueurName") String longueurName,
     		@RequestParam("longueurSpit") String longueurSpit,
@@ -151,12 +181,21 @@ public class SiteController {
     	longueur.setCotation(longueurCotation);
     	longueur.setWidth(longueurWidth);
     	longueurService.addLongueur(longueur);
-    	return new ModelAndView("redirect:/member#sitePage");    
+
+		session.removeAttribute("classActiveProfil");
+		session.removeAttribute("classActiveReservation");
+		session.removeAttribute("classActiveTopos");
+		session.setAttribute("classActiveSitesPage","active");
+    	redirectAttributes.addFlashAttribute(
+    			"message", "Longueur créée avec succès");
+    	return new ModelAndView("redirect:/person");    
     }
     
     @GetMapping("/getLabel/{id}/{isLabel}")
-    public String getLabel(
+    public ModelAndView getLabel(
     		Model model,
+			HttpSession session,
+    		RedirectAttributes redirectAttributes,
     		@PathVariable("id") Long siteId,
     		@PathVariable("isLabel") Integer isLabel
     ) {
@@ -164,14 +203,23 @@ public class SiteController {
 			Site site = siteService.getSite(siteId).get();
 			if(isLabel == 1) {
 				site.setLabel(1);
+				redirectAttributes.addFlashAttribute(
+		    			"message", "Label ajouté avec succès");
 			} else {
 				site.setLabel(0);
+				redirectAttributes.addFlashAttribute(
+		    			"message", "Label enlevé avec succès");
 			}
 			siteService.updateSite(siteId, site);
 		} catch (ResourceNotFoundException e) {
 			LOGGER.warn("resource not found"+siteId+e);
 		}
-    	return adminController.adminPage(model);
+
+		session.removeAttribute("classActiveMember");
+		session.removeAttribute("classActiveComment");
+		session.setAttribute("classActiveLabel","active");
+    	
+    	return new ModelAndView("redirect:/member");
     }
     
 }

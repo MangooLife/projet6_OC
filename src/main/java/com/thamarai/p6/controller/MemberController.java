@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thamarai.p6.entity.Person;
 import com.thamarai.p6.service.CommentService;
@@ -15,8 +17,8 @@ import com.thamarai.p6.service.PersonService;
 import com.thamarai.p6.service.SiteService;
 
 @Controller
-public class AdminController {
-	private static final Logger LOGGER = LogManager.getLogger(AdminController.class);
+public class MemberController {
+	private static final Logger LOGGER = LogManager.getLogger(MemberController.class);
 	
 	@Autowired
 	SiteService siteService;
@@ -27,18 +29,26 @@ public class AdminController {
 	@Autowired
 	PersonService personService;
 	
-	@RequestMapping("/admin")
-	public String adminPage(Model model) {
+	@RequestMapping("/member")
+	public ModelAndView memberPage(
+			Model model
+		) {
 		LOGGER.debug("Admin page OK");
 		model.addAttribute("sites", siteService.getAllSites());
 		model.addAttribute("comments", commmentService.getAllComments());
 		model.addAttribute("persons", personService.getAllPersons());
-		return "admin";
+		
+		if(!(model.containsAttribute("classActiveMember"))) {
+			model.addAttribute("classActiveLabel","active");
+		}
+		
+		return new ModelAndView("member");
 	}
 	
-	@GetMapping("/getAdmin/{id}/{isLabel}")
-    public String getLabel(
+	@GetMapping("/getMember/{id}/{isLabel}")
+    public ModelAndView getMember(
     		Model model,
+    		RedirectAttributes redirectAttributes,
     		@PathVariable("id") Long personId,
     		@PathVariable("isLabel") Integer isAdmin
     ) {
@@ -49,6 +59,9 @@ public class AdminController {
 			person.setStatus(0);
 		}
 		personService.updatePerson(personId, person);
-    	return this.adminPage(model);
+		
+		redirectAttributes.addFlashAttribute(
+    			"message", "Status du membre changé avec succès");
+    	return new ModelAndView("redirect:/member", "classActiveMember", "active");
     }
 }
