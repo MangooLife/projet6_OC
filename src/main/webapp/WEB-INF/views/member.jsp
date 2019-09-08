@@ -77,7 +77,7 @@
 																<p>
 																	<c:out value="${element.description}" />, par <i><c:out value="${element.person.username }"/></i> 
 																	- Le <c:out value="${element.publicationDate}"/>
-																	<a href="<c:url value="./deleteComment/${element.id}"/>">
+																	<a href="<c:url value="/deleteComment/${element.id}/membre"/>">
 																		<button type="button" class="btn btn-danger">Supprimer</button>
 																	</a>
 																	<button type="button" class="btn btn-warning"

@@ -8,7 +8,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="<c:url value="/updateComment/${element.id}"/>"
+				<form action="<c:url value="/updateComment/${element.id}/membre"/>"
 				method='POST'>
 					<div class="form-group">
 					<label for='comment'>Commentaire :</label>
