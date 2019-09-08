@@ -107,7 +107,7 @@ public class CommentController {
 		} else if(page.equals("site")) {
 	    	return new ModelAndView("redirect:/site/"+comment.getSite().getId());
 		} else{
-	    	return new ModelAndView("redirect:/member");
+	    	return new ModelAndView("redirect:/returnMember");
 		}
     }
 	
@@ -135,7 +135,7 @@ public class CommentController {
 		} else if(page.equals("site")) {
 	    	return new ModelAndView("redirect:/site/"+comment.getSite().getId());
 		} else {
-	    	return new ModelAndView("redirect:/member");
+	    	return new ModelAndView("redirect:/returnMember");
 		}
 	}
 }

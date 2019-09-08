@@ -1,5 +1,7 @@
 package com.thamarai.p6.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,23 +33,37 @@ public class MemberController {
 	
 	@RequestMapping("/member")
 	public ModelAndView memberPage(
-			Model model
+			Model model,
+			HttpSession session
 		) {
 		LOGGER.debug("Admin page OK");
 		model.addAttribute("sites", siteService.getAllSites());
 		model.addAttribute("comments", commmentService.getAllComments());
 		model.addAttribute("persons", personService.getAllPersons());
 		
-		if(!(model.containsAttribute("classActiveMember"))) {
-			model.addAttribute("classActiveLabel","active");
-		}
+		session.removeAttribute("classActiveMember");
+		session.removeAttribute("classActiveComment");
+		session.setAttribute("classActiveLabel","active");
 		
+		return new ModelAndView("member");
+	}
+	
+	@RequestMapping("/returnMember")
+	public ModelAndView returnMemberPage(
+			Model model
+		) {
+		LOGGER.debug("Admin page OK");
+		model.addAttribute("sites", siteService.getAllSites());
+		model.addAttribute("comments", commmentService.getAllComments());
+		model.addAttribute("persons", personService.getAllPersons());
+
 		return new ModelAndView("member");
 	}
 	
 	@GetMapping("/getMember/{id}/{isLabel}")
     public ModelAndView getMember(
     		Model model,
+			HttpSession session,
     		RedirectAttributes redirectAttributes,
     		@PathVariable("id") Long personId,
     		@PathVariable("isLabel") Integer isAdmin
@@ -60,8 +76,12 @@ public class MemberController {
 		}
 		personService.updatePerson(personId, person);
 		
+		
+		session.removeAttribute("classActiveLabel");
+		session.removeAttribute("classActiveComment");
+		session.setAttribute("classActiveMember","active");
 		redirectAttributes.addFlashAttribute(
     			"message", "Status du membre changé avec succès");
-    	return new ModelAndView("redirect:/member", "classActiveMember", "active");
+    	return new ModelAndView("redirect:/returnMember");
     }
 }

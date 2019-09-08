@@ -106,7 +106,7 @@ public class SiteController {
     	session.setAttribute("classActiveSitesPage","active");
     	redirectAttributes.addFlashAttribute(
     			"message", "Site créé avec succès");
-    	return new ModelAndView("redirect:/person");    
+    	return new ModelAndView("redirect:/returnPerson");    
     }
     
     @RequestMapping(value = {"/addSecteur"}, method = RequestMethod.POST)
@@ -130,7 +130,7 @@ public class SiteController {
 		session.setAttribute("classActiveSitesPage","active");
     	redirectAttributes.addFlashAttribute(
     			"message", "Secteur créé avec succès");
-    	return new ModelAndView("redirect:/person");    
+    	return new ModelAndView("redirect:/returnPerson");    
     }
     
     @RequestMapping(value = {"/addVoie"}, method = RequestMethod.POST)
@@ -158,7 +158,7 @@ public class SiteController {
 		session.setAttribute("classActiveSitesPage","active");
     	redirectAttributes.addFlashAttribute(
     			"message", "Voie créée avec succès");
-    	return new ModelAndView("redirect:/person");    
+    	return new ModelAndView("redirect:/returnPerson");    
     }
     
     @RequestMapping(value = {"/addLongueur"}, method = RequestMethod.POST)
@@ -188,7 +188,7 @@ public class SiteController {
 		session.setAttribute("classActiveSitesPage","active");
     	redirectAttributes.addFlashAttribute(
     			"message", "Longueur créée avec succès");
-    	return new ModelAndView("redirect:/person");    
+    	return new ModelAndView("redirect:/returnPerson");    
     }
     
     @GetMapping("/getLabel/{id}/{isLabel}")
@@ -219,7 +219,7 @@ public class SiteController {
 		session.removeAttribute("classActiveComment");
 		session.setAttribute("classActiveLabel","active");
     	
-    	return new ModelAndView("redirect:/member");
+    	return new ModelAndView("redirect:/returnMember");
     }
     
 }

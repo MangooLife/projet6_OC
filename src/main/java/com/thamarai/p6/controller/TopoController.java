@@ -116,7 +116,7 @@ public class TopoController {
 		session.setAttribute("classActiveTopos","active");
     	redirectAttributes.addFlashAttribute(
     			"message", "Topo créée avec succès");
-    	return new ModelAndView("redirect:/person");    
+    	return new ModelAndView("redirect:/returnPerson");    
     }
     
     @GetMapping("/topoStatus/{id}")
@@ -142,7 +142,7 @@ public class TopoController {
 		session.setAttribute("classActiveTopos","active");
     	redirectAttributes.addFlashAttribute(
     			"message", "Status de la topo changé avec succès");
-     	return new ModelAndView("redirect:/person");
+     	return new ModelAndView("redirect:/returnPerson");
     }
 
 }

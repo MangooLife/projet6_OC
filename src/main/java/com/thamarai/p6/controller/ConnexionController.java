@@ -136,5 +136,29 @@ public class ConnexionController {
 		}
 		
 	}
+	
+	@RequestMapping("/returnPerson")
+	public ModelAndView returnPerson(
+			HttpSession session, 
+			Model model, 
+			RedirectAttributes redirectAttributes
+	) {
+		if(!(session.getAttribute("username")==null)) {
+			String username = (String) session.getAttribute("username");
+			Person person = personService.authentificateUser(username).orElse(null);
+			model.addAttribute("person", person);
+			model.addAttribute("topos", person.getTopos());
+			model.addAttribute("sites", person.getSites());
+			model.addAttribute("comments", person.getComments());
+			
+			return new ModelAndView("person");
+			
+		} else {
+			redirectAttributes.addFlashAttribute(
+	    			"message", "Une erreur a été rencontrée lors de l'authentification");
+			return new ModelAndView("redirect:/connexion");
+		}
+		
+	}
 
 }

@@ -101,7 +101,7 @@ public class BookingController {
 		session.setAttribute("classActiveReservation","active");
 		redirectAttributes.addFlashAttribute(
 				"message", "Vous avez bien pris en compte la réservation. Veuillez contacter l'ami(e) par mail :)");
-    	return new ModelAndView("redirect:/person");
+    	return new ModelAndView("redirect:/returnPerson");
     }
 
 }

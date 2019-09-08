@@ -14,20 +14,20 @@
 						</c:if>
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 							<li class="nav-item">
-								<a class="nav-link ${classActiveLabel}" id="profil-tab" data-toggle="tab" href="#label"
+								<a class="nav-link ${sessionScope.classActiveLabel}" id="profil-tab" data-toggle="tab" href="#label"
 									role="tab" aria-controls="label" aria-selected="false">Gérer les labels</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link ${classActiveComment}" id="comments-tab" data-toggle="tab" href="#comments"
+								<a class="nav-link ${sessionScope.classActiveComment}" id="comments-tab" data-toggle="tab" href="#comments"
 									role="tab" aria-controls="comments" aria-selected="false">Gérer les commentaires</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link ${classActiveMember}" id="member-tab" data-toggle="tab" href="#member"
+								<a class="nav-link ${sessionScope.classActiveMember}" id="member-tab" data-toggle="tab" href="#member"
 									role="tab" aria-controls="member" aria-selected="false">Gérer les membres</a>
 							</li>
 						</ul>
 						<div class="tab-content" id="myTabContent">
-							<div class="tab-pane fade show ${classActiveLabel}" id="label" role="tabpanel" aria-labelledby="label-tab">
+							<div class="tab-pane fade show ${sessionScope.classActiveLabel}" id="label" role="tabpanel" aria-labelledby="label-tab">
 								<div class="card mb-3" style="margin-top:10px;">
 									<div class="row no-gutters">
 										<div class="col-md-12">
@@ -64,7 +64,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="tab-pane fade show ${classActiveComment}" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+							<div class="tab-pane fade show ${sessionScope.classActiveComment}" id="comments" role="tabpanel" aria-labelledby="comments-tab">
 								<div class="card mb-3" style="margin-top:10px;">
 									<div class="row no-gutters">
 										<div class="col-md-12">
@@ -109,7 +109,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="tab-pane fade show ${classActiveMember}" id="member" role="tabpanel" aria-labelledby="member-tab">
+							<div class="tab-pane fade show ${sessionScope.classActiveMember}" id="member" role="tabpanel" aria-labelledby="member-tab">
 								<div class="card mb-3" style="margin-top:10px;">
 									<div class="row no-gutters">
 										<div class="col-md-12">
