@@ -31,9 +31,6 @@ public class Topo {
     @Column(name = "description")
     private String description;
     
-    @Column(name = "place")
-    private String place;
-    
     @Column(name = "parution_date")
     private String parutionDate;
     
@@ -77,10 +74,6 @@ public class Topo {
 	public String getDescription() { return description; }
 
 	public void setDescription(String description) { this.description = description; }
-
-	public String getPlace() { return place; }
-
-	public void setPlace(String place) { this.place = place; }
 
 	public String getParutionDate() { return parutionDate; }
 
