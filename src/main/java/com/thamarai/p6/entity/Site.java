@@ -50,6 +50,7 @@ public class Site {
     private Set<Comment> comments = new HashSet<Comment>();
     
     @ManyToMany(mappedBy = "topoSites")
+    @OrderBy
     private Set<Topo> topos = new HashSet<Topo>();
 
     public Site() {}

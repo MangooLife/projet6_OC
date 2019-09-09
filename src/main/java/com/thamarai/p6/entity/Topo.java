@@ -59,6 +59,7 @@ public class Topo {
     		  name = "topo_site", 
     		  joinColumns = @JoinColumn(name = "topo_id"), 
     		  inverseJoinColumns = @JoinColumn(name = "site_id"))
+    @OrderBy
     private Set<Site> topoSites  = new HashSet<Site>();
     
     public Topo() {}

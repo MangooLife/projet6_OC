@@ -58,6 +58,7 @@ public class Person {
     private Set<Comment> comments = new HashSet<Comment>();
 	
 	@ManyToMany(mappedBy = "bookingPerson")
+	@OrderBy
 	private Set<Booking> booking = new HashSet<Booking>();
 
     public Person() {
