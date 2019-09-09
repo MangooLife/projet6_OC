@@ -11,6 +11,6 @@ import com.thamarai.p6.entity.Voie;
 @Repository
 public interface VoieRepository extends JpaRepository<Voie, Long>{
 	
-	@Query(value = "SELECT * FROM Voie v WHERE v.cotation = ?1 OR v.width = ?2", nativeQuery = true)
+	@Query(value = "SELECT DISTINCT * FROM Voie v WHERE v.cotation = ?1 OR v.width = ?2", nativeQuery = true)
 	List<Voie>  getAllVoiesBySomeKey(String cotationVoie, String widthVoie);
 }
