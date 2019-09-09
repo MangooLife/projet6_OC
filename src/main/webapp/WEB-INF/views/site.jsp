@@ -133,13 +133,35 @@
 											<c:out value="${element.description}" />, par <i><c:out value="${element.person.username}"/></i> 
 											- Le <c:out value="${element.publicationDate}" /> 
 											<c:if test="${(sessionScope.member == 1)}">
-												<a href="<c:url value="/deleteComment/${element.id}/site"/>">
-													<button type="button" class="btn btn-danger">Supprimer</button>
-												</a>
+												<button type="button" class="btn btn-danger"
+												data-toggle="modal" data-target="#deleteComment">
+													Supprimer
+												</button>
 												<button type="button" class="btn btn-warning"
 												data-toggle="modal" data-target="#updateComment${element.id}">
 													Modifier
 												</button>
+												<hr/>
+												<div class="modal fade" id="deleteComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="exampleModalLabel">Confirmer la suppression du commentaire</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<p> Voulez-vous vraiment supprimer le commentaire ?</p>
+																<form>
+																	<a href="<c:url value="/deleteComment/${element.id}/site"/>">
+																		<button type="button" class="btn btn-danger">Supprimer</button>
+																	</a>
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>
 												<div class="modal fade" id="updateComment${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 													<div class="modal-dialog" role="document">
 														<div class="modal-content">

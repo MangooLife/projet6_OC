@@ -53,7 +53,7 @@ public class CommentController {
 		comment.setSite(site);
 		commentService.addComment(comment);
 		LOGGER.info("Add comment for a site");
-		return siteController.site(site.getId(), model);
+		return new ModelAndView("redirect:/site/"+comment.getSite().getId());
 	}
 	
 	@RequestMapping(value = {"/addCommentTopo/{person}/{topo}"}, method = RequestMethod.POST)
@@ -69,7 +69,7 @@ public class CommentController {
 		comment.setTopo(topo);
 		commentService.addComment(comment);
 		LOGGER.info("Add comment for a site");
-		return topoController.topo(topo.getId(), model);
+		return new ModelAndView("redirect:/topo/"+comment.getTopo().getId());
 	}
 	
 	public Comment addComment(String description, Person person) {
