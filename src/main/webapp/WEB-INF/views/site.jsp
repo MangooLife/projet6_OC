@@ -141,7 +141,6 @@
 												data-toggle="modal" data-target="#updateComment${element.id}">
 													Modifier
 												</button>
-												<hr/>
 												<div class="modal fade" id="deleteComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 													<div class="modal-dialog" role="document">
 														<div class="modal-content">
@@ -187,6 +186,7 @@
 													</div>
 												</div>
 											</c:if>
+											<hr/>
 										</p>
 									</c:forEach>
 								</c:when>

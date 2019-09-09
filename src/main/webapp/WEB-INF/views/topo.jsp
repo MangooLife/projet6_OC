@@ -126,6 +126,7 @@
 															</div>
 														</div>
 													</c:if>
+													<hr/>
 												</p>
 											</c:forEach>
 										</c:when>
