@@ -25,6 +25,7 @@ import com.thamarai.p6.entity.Person;
 import com.thamarai.p6.entity.Site;
 import com.thamarai.p6.entity.Topo;
 import com.thamarai.p6.service.CommentService;
+import com.thamarai.p6.service.PersonService;
 
 @Controller
 public class CommentController {
@@ -40,15 +41,19 @@ public class CommentController {
 	@Autowired
 	TopoController topoController;
 	
-	@RequestMapping(value = {"/addCommentSite/{person}/{site}"}, method = RequestMethod.POST)
+	@Autowired 
+	PersonService personService;
+	
+	@RequestMapping(value = {"/addCommentSite/{username}/{site}"}, method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView addCommentSite(
 		HttpSession session,
 		Model model,
 		@RequestParam("description") String description,
-		@PathVariable("person") final Person person,
+		@PathVariable("username") final String username,
 		@PathVariable("site") final Site site
 	)  throws ResourceNotFoundException {
+		Person person = personService.authentificateUser(username).get();
 		Comment comment = addComment(description, person);
 		comment.setSite(site);
 		commentService.addComment(comment);
@@ -56,15 +61,16 @@ public class CommentController {
 		return new ModelAndView("redirect:/site/"+comment.getSite().getId());
 	}
 	
-	@RequestMapping(value = {"/addCommentTopo/{person}/{topo}"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/addCommentTopo/{username}/{topo}"}, method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView addCommentTopo(
 		HttpSession session,
 		Model model,
 		@RequestParam("description") String description,
-		@PathVariable("person") final Person person,
+		@PathVariable("username") final String username,
 		@PathVariable("topo") final Topo topo
 	)  throws ResourceNotFoundException {
+		Person person = personService.authentificateUser(username).get();
 		Comment comment = addComment(description, person);
 		comment.setTopo(topo);
 		commentService.addComment(comment);

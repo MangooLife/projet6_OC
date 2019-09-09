@@ -137,7 +137,7 @@
 									<hr/>
 									<c:choose>
 										<c:when test="${!(empty sessionScope.username)}">
-											<form action="<c:url value="/addCommentTopo/${topo.person.id}/${topo.id}" />"
+											<form action="<c:url value="/addCommentTopo/${sessionScope.username}/${topo.id}" />"
 												  method='POST'>
 									    		<label for='comment'>Commentaire :</label>
 									    		<textarea id='description' name='description' class="form-control" placeholder='Un commentaire ?' rows='3' cols='50' required ></textarea><br/>

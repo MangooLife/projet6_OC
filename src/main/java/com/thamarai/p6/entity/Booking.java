@@ -36,6 +36,7 @@ public class Booking {
     		  name = "person_book", 
     		  joinColumns = @JoinColumn(name = "booking_id"), 
     		  inverseJoinColumns = @JoinColumn(name = "person_id"))
+    @OrderBy
     private Set<Person> bookingPerson  = new HashSet<Person>();
     
     public Booking() {};
