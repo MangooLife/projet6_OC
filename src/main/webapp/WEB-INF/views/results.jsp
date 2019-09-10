@@ -40,19 +40,17 @@
 														</th>
 														<td>${element.description}</td>
 													</tr>
-													<c:forEach items="${secteurs}" var="element2">
-														<c:if test="${!(element.id==element2.site.id)}">
-															<tr>
-																<th scope="row">
-																	<a href="<c:url value="/site/${element2.site.id}" />">
-															   			${element2.site.name}
-															   		</a>
-																</th>
-																<td>${element2.site.description}</td>
-															</tr>
-														</c:if>
-												   	</c:forEach>
 											   	</c:forEach>
+											   	<c:forEach items="${secteurs}" var="element2">
+													<tr>
+														<th scope="row">
+															<a href="<c:url value="/site/${element2.site.id}" />">
+													   			${element2.site.name}
+													   		</a>
+														</th>
+														<td>${element2.site.description}</td>
+													</tr>
+												</c:forEach>
 											</c:when>
 											<c:when test="${!(empty resultsLongueur)}">
 												<c:forEach items="${resultsLongueur}" var="element">

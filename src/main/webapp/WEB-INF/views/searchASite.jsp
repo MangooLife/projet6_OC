@@ -8,7 +8,7 @@
 				<div class="row no-gutters">
 					<div class="col-md-12">
 						<h3>
-							Par nom (topo ou secteur)
+							Par nom (site ou secteur)
 						</h3>
 						<form action="<c:url value="/searchSitePerkeyword/" />"
 							  method='POST' enctype="multipart/form-data"
