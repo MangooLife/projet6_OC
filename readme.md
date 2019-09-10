@@ -17,7 +17,7 @@ jdbc.url=jdbc:mysql://localhost:3306/db_projet6_OC?serverTimezone=EST5EDT&useUni
 jdbc.username=yourUsernme
 jdbc.password=yourPassword
 ```
-- Click right on the file project > Run As > Run on Server (Select the configuration whose you have done before). 
+- Click right on the file project > Run As > Run on Server (Select the configuration you have done before).
 
 - And: Et voilà!
 
