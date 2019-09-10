@@ -1,11 +1,12 @@
 # How to run the webapp with eclipse ?
 
 ## 1. Clone or download the repository
+- https://github.com/MangooLife/projet6_OC
 
 ## 2. Prepare the database with MySQLWorkbench
 - Run the different scripts whose are in projet_6_db in MySQLWorkbench (per example)
  
-## 3. Configure eclipse 
+## 3. Configure eclipse
 - Please use apache-tomcat-9.0.21
 
 ## 4. Run the webapp
