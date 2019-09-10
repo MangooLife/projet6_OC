@@ -11,6 +11,7 @@
 		    		<c:choose>
 		    			<c:when test="${!(empty sites)}">
 		    				<input type="text" id="topoName" class="fadeIn second" name="topoName" placeholder="Nom de la topo" required />
+		    				<input type="text" id="topoPlace" class="fadeIn second" name="topoPlace" placeholder="Lieu de la topo" required />
 				    		<textarea id="description" class="fadeIn second" name="description"  placeholder="Description de la topo..."
 				    				  rows="3" required ></textarea>
 				    		<input type="file" id="topoImage" class="fadeIn second" name="topoImage">

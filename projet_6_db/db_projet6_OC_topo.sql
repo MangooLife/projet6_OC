@@ -33,6 +33,7 @@ CREATE TABLE `topo` (
   `person_id` int(11) NOT NULL,
   `booking_id` int(11) DEFAULT NULL,
   `image` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `place` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_person_id_idx` (`person_id`),
   KEY `fk_topo_booking_id_idx` (`booking_id`),
@@ -49,7 +50,7 @@ CREATE TABLE `topo` (
 
 LOCK TABLES `topo` WRITE;
 /*!40000 ALTER TABLE `topo` DISABLE KEYS */;
-INSERT INTO `topo` VALUES (46,'Pralognan la Valoise','Découvrez 3 magnifiques sites à  Pralognan la Vanoise.','2019-08-23 20:41:08',1,2,18,'/resources/image/download/pla.jpg'),(52,'Topo de Corse','Trois super topologies à découvrir en Corse !','2019-09-09 22:12:28',0,4,NULL,'/resources/image/download/omer-salom-PfTNxPww6bY-unsplash.jpg');
+INSERT INTO `topo` VALUES (46,'Pralognan la Valoise','Découvrez 3 magnifiques sites à  Pralognan la Vanoise.','2019-08-23 20:41:08',1,2,18,'/resources/image/download/pla.jpg','Savoie'),(52,'Topo de Corse','Trois super topologies à découvrir en Corse !','2019-09-09 22:12:28',0,4,NULL,'/resources/image/download/omer-salom-PfTNxPww6bY-unsplash.jpg','Corse');
 /*!40000 ALTER TABLE `topo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

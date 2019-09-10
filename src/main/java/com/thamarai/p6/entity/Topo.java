@@ -40,6 +40,9 @@ public class Topo {
     @Column(name = "image")
     private String image;
     
+    @Column(name = "place")
+    private String place;
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="person_id", referencedColumnName = "id")
     @OrderBy
@@ -87,6 +90,10 @@ public class Topo {
 	public String getImage() { return image; }
 
 	public void setImage(String image) { this.image = image; }
+
+	public String getPlace() { return place; }
+
+	public void setPlace(String place) { this.place = place;}
 
 	public Person getPerson() { return person; }
 

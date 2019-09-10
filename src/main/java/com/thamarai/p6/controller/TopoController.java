@@ -76,6 +76,7 @@ public class TopoController {
     		RedirectAttributes redirectAttributes,
     		@PathVariable("id") Long personId,
     		@RequestParam("topoName") String topoName,
+    		@RequestParam("topoPlace") String topoPlace,
     		@RequestParam("description") String description,
     		@RequestParam("topoImage") CommonsMultipartFile topoImage,
     		@RequestParam("sites") List<Long> sites
@@ -88,6 +89,7 @@ public class TopoController {
 		Person person = personService.getPerson(personId).get();
     	Topo topo = new Topo();
     	topo.setName(topoName);
+    	topo.setPlace(topoPlace);
     	topo.setDescription(description);
     	topo.setParutionDate(formatter.format(date));
     	topo.setStatus(0);

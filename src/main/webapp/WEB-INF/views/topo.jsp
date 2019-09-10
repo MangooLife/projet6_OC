@@ -31,6 +31,7 @@
 							<div class="col-md-8">
 								<div class="card-body">
 									<h5 class="card-title">${topo.name}</h5>
+									<p class="card-text"><b>Lieu: ${topo.place}</b></p>
 									<p class="card-text">${topo.description}</p>
 									<table class="table table-hover">
 										<thead>
