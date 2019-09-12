@@ -7,7 +7,7 @@
 - Run the different scripts whose are in projet_6_db in MySQLWorkbench (per example)
  
 ## 3. Configure eclipse
-- Please use apache-tomcat-9.0.21
+- Please use apache-tomcat-9.0.21 and jdk-11.0.1.jdk
 
 ## 4. Run the webapp
 - Configure application.properties with your database's configurations (/projet6_OC/src/main/resources/application.properties)
